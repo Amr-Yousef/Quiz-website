@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+$clr-light: #e7f6f2;
+$clr-medium: #a5c9ca;
+$clr-input-bg: rgb(58, 92, 101, 30%);
+$clr-dark: #3a5c65;
+$clr-bg: #2d3434;
+
+* {
+    background-color: $clr-bg;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.title {
+    color: $clr-light;
+    text-align: center;
+    margin-bottom: 4rem;
+
+    header {
+        margin: 2rem;
+        margin-bottom: 3rem;
+
+        p {
+            font-size: 3rem;
+            font-weight: 100;
+            margin: auto;
+        }
+
+        a {
+            color: $clr-light;
+            text-decoration: none;
+            font-size: 5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                font-size: 5.1rem; // TODO: Use transform instead(?)
+                transition: all 0.5s ease-in-out;
+            }
+        }
+    }
+
+    p {
+        margin: auto;
+        text-align: justify;
+        text-align-last: center;
+        font-size: 1.5rem;
+        font-weight: 300;
+        max-width: 70vw;
+    }
+
+}
+
+
+
+.container {
+    display: flex;
+    justify-content: center;
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 1.5rem;
+        max-width: 70vw;
+
+        p {
+            color: $clr-light;
+            text-decoration: underline;
+            text-underline-offset: 0.5rem;
+            text-decoration-thickness: 0.05rem;
+        }
+
+        textarea {
+            font-size: 1.5rem;
+            color: $clr-light;
+            border-color: $clr-dark;
+            padding: 1rem;
+
+            resize: none;
+            height: 6rem;
+            width: 100%;
+
+            border-radius: 0.5rem;
+            background-color: $clr-input-bg;
+            border-width: 0.1rem;
+
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .trueorfalse {
+            display: flex;
+            align-items: center;
+
+            p {
+                margin-right: 5rem;
+            }
+
+            .choices {
+                color: $clr-light;
+                font-weight: 300;
+                display: flex;
+
+
+                label {
+                    display: flex;
+                    align-items: center;
+                    margin-left: 4rem;
+                    cursor: pointer;
+                }
+
+                input {
+                    /* Hide the browser's default radio button */
+                    display: none;
+
+                    &:checked+.checkmark::after {
+                        transform: scale(1);
+                        transition: ease-in-out 0.3s;
+                    }
+                }
+
+                .checkmark {
+                    height: 1.5rem;
+                    width: 1.5rem;
+                    border: 2px solid $clr-light;
+                    border-radius: 50%;
+                    margin-right: 1rem;
+                    box-sizing: border-box;
+                    padding: 4px;
+
+                    &::after {
+                        content: "";
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                        background: $clr-light;
+                        border-radius: 50%;
+
+                        transform: scale(0);
+                        transition: ease-in-out 0.3s;
+                    }
+                }
+            }
+        }
+
+        .answers {
+            .option {
+                position: relative;
+                display: flex;
+
+                .option-fields {
+                    width: 100%;
+
+                    .option-container {
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 1rem;
+
+                        label {
+                            display: flex;
+                            align-items: center;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .field {
+                        font-size: 1rem;
+                        color: $clr-light;
+                        border: solid $clr-dark;
+                        padding: 0.5rem;
+
+                        width: 100%;
+                        padding-left: 2.5rem;
+
+                        border-radius: 0.5rem;
+                        background-color: $clr-input-bg;
+                        border-width: 0.1rem;
+
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    input[type="checkbox"] {
+                        display: none;
+                        position: absolute;
+                        left: -5rem;
+                        
+                        
+                        &:checked + .correctmark::after {
+                            transform: scale(1);
+                            transition: ease-in-out 0.3s;
+                        }
+
+                        // checkbox styling after checked
+                        &:checked + .correctmark {
+                            border-color: rgb(121, 203, 121);
+                            background-color: rgb(121, 203, 121);
+                            box-shadow: 0rem 0rem 1.5rem rgb(121, 203, 121);
+                            transition: ease-in 0.3s;
+                        }
+                    }
+
+                    .correctmark {
+                        // checkbox styling before checked
+                        position: absolute;
+                        left: -5rem;
+                        height: 1.8rem;
+                        width: 1.8rem;
+                        border: 1px solid $clr-dark;
+                        background-color: $clr-input-bg;
+                        border-radius: 20%;
+                        margin-right: 1rem;
+                        box-sizing: border-box;
+                        padding: 4px;
+                        transition: ease-in 0.15s;
+    
+                        // check mark styling 
+                        &::after {
+                            content: "";
+                            width: 100%;
+                            height: 100%;
+                            display: block;
+                            background-image: url(../svg/check.svg);
+                            background-size: contain;
+    
+                            transform: scale(0);
+                            transition: ease-in 0.3s;
+                        }
+                    }
+                }
+            }
+            
+            
+            @mixin icon($icon) {
+                padding-left: 1rem;
+                background: url($icon) no-repeat left;
+                background-size: 1.5rem;
+                position: absolute;
+                display: block;
+                height: 1.5rem;
+                width: 1.5rem;
+                left: 0.5rem;
+            }
+            .letter-A {
+                @include icon('../svg/Letter\ A.svg');
+            }
+            .letter-B {
+                @include icon('../svg/Letter\ B.svg');
+            }
+            .letter-C {
+                @include icon('../svg/Letter\ C.svg');
+            }
+            .letter-D {
+                @include icon('../svg/Letter\ D.svg');
+            }
+
+
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+
+            .submit {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                max-width: 10rem;
+                align-items: center;
+    
+                button {
+                    margin: 1rem;
+                    margin-top: 4rem;
+                    font-size: 1.3rem;
+                    font-weight: 500;
+                    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+
+                    color: $clr-light;
+                    border: solid $clr-dark;
+                    border-radius: 0.5rem;
+                    background-color: $clr-input-bg;
+                    border-width: 0.1rem;
+                }
+
+                input[type="reset"] {
+                    color: $clr-light;
+                    border: none;
+                    text-decoration: underline;
+                    text-underline-offset: 0.2rem;
+                    text-decoration-thickness: 0.2rem;
+                    font-size: 1rem;
+                    cursor: pointer;
+                }
+            }
+        }
+
+    }
+}

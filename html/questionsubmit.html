@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../styles/question-submit.css">
+    <link rel="stylesheet" type="text/css" href="../assets/styles/question-submit.css">
 </head>
 <body>
 
-<div id="title">
+<div class="title">
     <header>
         <p>add a</p>
         <a href="#">question</a> <!-- FEATURE: When clicked, it'll scroll down to prefectly fit the question form into view -->
@@ -13,6 +13,74 @@
     <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti maiores, ab dolorum doloremque officia cupiditate reprehenderit atque tempore, assumenda quibusdam nesciunt numquam. Magnam dolorum rem minima ullam veniam quo architecto?
     </p>
+</div>
+<div class="container">
+    <form class="form">
+        <div class="question">
+            <p>What is your question?</p>
+            <textarea placeholder="Type your question here..."></textarea>
+        </div>
+        <div class="trueorfalse">
+            <p>Is this a true or false question?</p>
+            <div class="choices">
+                <label for="tfradio-no">
+                    <input type="radio" checked="checked" name="tfradio" id="tfradio-no">
+                    <div class="checkmark"></div>
+                    No
+                </label>
+                <label for="tfradio-yes">
+                    <input type="radio" name="tfradio" id="tfradio-yes">
+                    <div class="checkmark"></div>
+                    Yes
+                </label>
+            </div>
+        </div>
+        <div class="answers">
+            <p>What are the choices?</p>
+            <div class="option">
+                <div class="option-fields">
+                    <div class="option-container">
+                        <label for="option-1">
+                            <input type="checkbox" class="radio" id="option-1" name="ans[]" />
+                            <div class="correctmark"></div>
+                        </label>
+                        <i class="letter-A"></i>
+                        <input type="text" placeholder="Type your choice here..." class="field">
+                    </div>
+                    <div class="option-container">
+                        <label for="option-2">
+                            <input type="checkbox" class="radio" id="option-2" name="ans[]" />
+                            <div class="correctmark"></div>
+                        </label>
+                        <i class="letter-B"></i>
+                        <input type="text" placeholder="Type your choice here..." class="field">
+                    </div>
+                    <div class="option-container">
+                        <label for="option-3">
+                            <input type="checkbox" class="radio" id="option-3" name="ans[]" />
+                            <div class="correctmark"></div>
+                        </label>
+                        <i class="letter-C"></i>
+                        <input type="text" placeholder="Type your choice here..." class="field">
+                    </div>
+                    <div class="option-container">
+                        <label for="option-4">
+                            <input type="checkbox" class="radio" id="option-4" name="ans[]" />
+                            <div class="correctmark"></div>
+                        </label>
+                        <i class="letter-D"></i>
+                        <input type="text" placeholder="Type your choice here..." class="field">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="buttons">
+            <div class="submit">
+                <button>SUBMIT</button>
+                <input type="reset">
+            </div>
+        </div>
+    </form>
 </div>
 
 </body>

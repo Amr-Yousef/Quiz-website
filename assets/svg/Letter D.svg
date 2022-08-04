@@ -1,0 +1,19 @@
+<svg id="Letter" xmlns="http://www.w3.org/2000/svg" width="48.875" height="48.91" viewBox="0 0 48.875 48.91">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #e7f6f2;
+      }
+
+      .cls-1, .cls-2 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: #354343;
+      }
+    </style>
+  </defs>
+  <path id="Rounded_Rectangle_2" data-name="Rounded Rectangle 2" class="cls-1" d="M431.978,1364.04h32.868a8,8,0,0,1,8,8v32.89a8,8,0,0,1-8,8H431.978a8,8,0,0,1-8-8v-32.89A8,8,0,0,1,431.978,1364.04Z" transform="translate(-423.969 -1364.03)"/>
+  <path id="D" class="cls-2" d="M447.18,1372.7h-12.9v30.42h12.9c9.536,0,14.742-5.48,14.742-15.21S456.716,1372.7,447.18,1372.7Zm-0.784,24.43H442.2v-18.44H446.4c5.16,0,7.418,3.14,7.418,9.22S451.556,1397.13,446.4,1397.13Z" transform="translate(-423.969 -1364.03)"/>
+</svg>
