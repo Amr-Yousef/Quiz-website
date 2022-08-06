@@ -276,7 +276,7 @@ $clr-bg: #2d3434;
                 align-items: center;
     
                 button {
-                    margin: 1rem;
+                    margin: 1.5rem;
                     margin-top: 4rem;
                     font-size: 1.3rem;
                     font-weight: 500;
@@ -287,6 +287,18 @@ $clr-bg: #2d3434;
                     border-radius: 0.5rem;
                     background-color: $clr-input-bg;
                     border-width: 0.1rem;
+
+                    transition: ease-in 0.3s;
+
+                    &:hover {
+                        box-shadow: 0rem 0rem 0.8rem #58a6bc;
+                        border-color: #58a6bc;
+                        background-color: #58a6bc;
+                        transform: scale(1.05);
+                        cursor: pointer;
+
+                        transition: ease-in 0.3s;
+                    }
                 }
 
                 input[type="reset"] {
@@ -297,6 +309,7 @@ $clr-bg: #2d3434;
                     text-decoration-thickness: 0.2rem;
                     font-size: 1rem;
                     cursor: pointer;
+                    margin-bottom: 1rem;
                 }
             }
         }

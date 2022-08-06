@@ -4,7 +4,6 @@
     <link rel="stylesheet" type="text/css" href="../assets/styles/question-submit.css">
 </head>
 <body>
-
 <div class="title">
     <header>
         <p>add a</p>
@@ -15,7 +14,7 @@
     </p>
 </div>
 <div class="container">
-    <form class="form">
+    <form id="question-form" class="form">
         <div class="question">
             <p>What is your question?</p>
             <textarea placeholder="Type your question here..."></textarea>
@@ -76,12 +75,13 @@
         </div>
         <div class="buttons">
             <div class="submit">
-                <button>SUBMIT</button>
+                <button onclick="return submitQuestion();">SUBMIT</button>
                 <input type="reset">
             </div>
         </div>
     </form>
 </div>
-
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
+<script src="../assets/js/questionsubmit.js"></script>
 </body>
 </html>
