@@ -17,18 +17,18 @@
     <form id="question-form" class="form">
         <div class="question">
             <p>What is your question?</p>
-            <textarea placeholder="Type your question here..."></textarea>
+            <textarea placeholder="Type your question here..." id="title"></textarea>
         </div>
         <div class="trueorfalse">
             <p>Is this a true or false question?</p>
             <div class="choices">
                 <label for="tfradio-no">
-                    <input type="radio" checked="checked" name="tfradio" id="tfradio-no">
+                    <input type="radio" checked="checked" name="tfradio" id="tfradio-no" value="no">
                     <div class="checkmark"></div>
                     No
                 </label>
                 <label for="tfradio-yes">
-                    <input type="radio" name="tfradio" id="tfradio-yes">
+                    <input type="radio" name="tfradio" id="tfradio-yes" value="yes">
                     <div class="checkmark"></div>
                     Yes
                 </label>
@@ -39,36 +39,36 @@
             <div class="option">
                 <div class="option-fields">
                     <div class="option-container">
-                        <label for="option-1">
-                            <input type="checkbox" class="radio" id="option-1" name="ans[]" />
+                        <label for="option-a">
+                            <input type="checkbox" name="answer" class="radio" id="option-a" value="a"/>
                             <div class="correctmark"></div>
                         </label>
                         <i class="letter-A"></i>
-                        <input type="text" placeholder="Type your choice here..." class="field">
+                        <input type="text" placeholder="Type your choice here..." class="field" id="a">
                     </div>
                     <div class="option-container">
-                        <label for="option-2">
-                            <input type="checkbox" class="radio" id="option-2" name="ans[]" />
+                        <label for="option-b">
+                            <input type="checkbox" name="answer" class="radio" id="option-b" value="b"/>
                             <div class="correctmark"></div>
                         </label>
                         <i class="letter-B"></i>
-                        <input type="text" placeholder="Type your choice here..." class="field">
+                        <input type="text" placeholder="Type your choice here..." class="field" id="b">
                     </div>
                     <div class="option-container">
-                        <label for="option-3">
-                            <input type="checkbox" class="radio" id="option-3" name="ans[]" />
+                        <label for="option-c">
+                            <input type="checkbox" name="answer" class="radio" id="option-c" value="c"/>
                             <div class="correctmark"></div>
                         </label>
                         <i class="letter-C"></i>
-                        <input type="text" placeholder="Type your choice here..." class="field">
+                        <input type="text" placeholder="Type your choice here..." class="field" id="c">
                     </div>
                     <div class="option-container">
-                        <label for="option-4">
-                            <input type="checkbox" class="radio" id="option-4" name="ans[]" />
+                        <label for="option-d">
+                            <input type="checkbox" name="answer" class="radio" id="option-d" value="d"/>
                             <div class="correctmark"></div>
                         </label>
                         <i class="letter-D"></i>
-                        <input type="text" placeholder="Type your choice here..." class="field">
+                        <input type="text" placeholder="Type your choice here..." class="field" id="d">
                     </div>
                 </div>
             </div>
