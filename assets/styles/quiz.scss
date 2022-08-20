@@ -1,0 +1,110 @@
+@import "base";
+
+* {
+    background-color: $clr-bg;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.title {
+    color: $clr-light;
+    text-align: center;
+
+    header {
+        color: $clr-light;
+        text-decoration: none;
+        font-size: 5rem;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    p {
+        font-weight: 300;
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+
+    .question {
+        color: $clr-light;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .question-title {
+            font-size: 2rem;
+            text-align: center;
+            max-width: 50vw;
+        }
+    
+        .answers {
+            .option {
+                position: relative;
+                display: flex;
+    
+                .option-fields {
+                    width: 50vw;
+    
+                    .option-container {
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 1rem;
+    
+                        label {
+                            display: flex;
+                            align-items: center;
+                            cursor: pointer;
+                        }
+                    }
+    
+                    .field {
+                        margin: 0;
+                        font-size: 1rem;
+                        color: $clr-light;
+                        border: solid $clr-dark;
+                        padding: 0.5rem;
+    
+                        width: 100%;
+                        padding-left: 2.5rem;
+    
+                        border-radius: 0.5rem;
+                        background-color: $clr-input-bg;
+                        border-width: 0.1rem;
+    
+    
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
+            }
+            
+            
+            @mixin icon($icon) {
+                padding-left: 1rem;
+                background: url($icon) no-repeat left;
+                background-size: 1.5rem;
+                position: absolute;
+                display: block;
+                height: 1.5rem;
+                width: 1.5rem;
+                left: 0.5rem;
+            }
+            .letter-A {
+                @include icon('../svg/Letter\ A.svg');
+            }
+            .letter-B {
+                @include icon('../svg/Letter\ B.svg');
+            }
+            .letter-C {
+                @include icon('../svg/Letter\ C.svg');
+            }
+            .letter-D {
+                @include icon('../svg/Letter\ D.svg');
+            }
+    
+    
+        }
+    }
+}
