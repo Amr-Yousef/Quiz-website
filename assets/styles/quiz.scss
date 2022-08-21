@@ -25,6 +25,8 @@
 .container {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
     .question {
         color: $clr-light;
@@ -106,5 +108,42 @@
     
     
         }
+    }
+
+    #next {
+        margin: 1.5rem;
+        margin-top: 4rem;
+        font-size: 1.3rem;
+        font-weight: 500;
+        padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+
+        color: $clr-light;
+        border: solid $clr-dark;
+        border-radius: 0.5rem;
+        background-color: $clr-input-bg;
+        border-width: 0.1rem;
+
+        transition: ease-in 0.3s;
+
+        &:hover {
+            box-shadow: 0rem 0rem 0.8rem #58a6bc;
+            border-color: #58a6bc;
+            background-color: #58a6bc;
+            transform: scale(1.05);
+            cursor: pointer;
+
+            transition: ease-in 0.3s;
+        }
+    }
+
+    #previous {
+        color: $clr-light;
+        border: none;
+        text-decoration: underline;
+        text-underline-offset: 0.2rem;
+        text-decoration-thickness: 0.05rem;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-bottom: 1rem;
     }
 }

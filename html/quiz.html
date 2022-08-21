@@ -6,20 +6,20 @@
 <body>
     <div class="title">
         <header>
-            Question #3
+            Question
         </header>
-        <p>
-            Seed: 123123123 <!-- Make it so when the seed is clicked, a link to this quiz is copied. -->
+        <p id="seed">
+            Seed: SOON! <!-- Make it so when the seed is clicked, a link to this quiz is copied. -->
         </p>
         <p>
-            UUID: 43fb48a3-69fe-453e-874a-7312090b2bbf
+            UUID: <a id="uuid"></a>
         </p>
     </div>
     <div class="container">
         <div class="question">
             <div class="question-title">
-                <p>
-                    This is how the question title will look, hopefully it will look good. Does it?
+                <p id="q-title">
+                    <span>&#8203;</span>
                 </p>
             </div>
             <div class="answers">
@@ -45,6 +45,12 @@
                 </div>
             </div>
         </div>
+        <div class="buttons">
+            <button class="button" id="previous">Previous question</button>
+            <button class="button" id="next">Next</button>
+        </div>
     </div>
-    
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
+<script src="../assets/js/quiz.js"></script>
 </body>
+</html>

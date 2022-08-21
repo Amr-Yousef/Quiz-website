@@ -1,13 +1,15 @@
-from importlib.metadata import metadata
 import json
-from msilib.schema import tables
-import re
-from typing import Optional
+import random
 from unittest import result
+
 from fastapi import FastAPI, Request
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import sessionmaker
+
 import uuid
 
 from assets.python.quizwebsite import Question
@@ -42,6 +44,17 @@ async def root(id: str):
     result = session.query(questions).filter(questions.c.id == id).first()
     return result
 
+@app.get("/api/quiz/random")
+async def root():
+    metadata = MetaData()
+    questions = Table('questions', metadata, autoload=True, autoload_with=engine)
+    session = Session()
+
+    rand = random.randrange(0, session.query(questions).count())
+    result = session.query(questions)[rand]
+    return result
+
+
 @app.post("/api/question")
 async def root(info: Request):
     req_info = await info.json()
@@ -51,7 +64,7 @@ async def root(info: Request):
     questions = Table('questions', metadata, autoload=True, autoload_with=engine)
     session = Session()
 
-    new_question = Question(id=str(uuid.uuid4()), title=req_info['title'], choices=str(req_info['choices']), answer=str(req_info['answer']))
+    new_question = Question(id=str(uuid.uuid4()), title=req_info['title'], choices=json.dumps(req_info['choices']), answer=json.dumps(req_info['answer']))
     session.add(new_question)
     session.commit()
 
@@ -61,4 +74,3 @@ async def root(info: Request):
         "status" : "Question Added",
         "data" : req_info
     }
-    

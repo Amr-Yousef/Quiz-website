@@ -7,7 +7,6 @@ function getAnswer() {
 }
 
 function submitQuestion() {
-    // let form = $('#question-form').serializeArray();
 
     let data = {
         title: $('#title').val(),
@@ -27,8 +26,7 @@ function submitQuestion() {
         data: JSON.stringify(data),
         success: function (data) {
             alert("success");
-            console.log(form);
-            console.log(data)
+            console.log(data);
         }
     });
     return false;
