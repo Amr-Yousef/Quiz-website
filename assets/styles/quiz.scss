@@ -41,6 +41,7 @@
         }
     
         .answers {
+
             .option {
                 position: relative;
                 display: flex;
@@ -52,61 +53,55 @@
                         display: flex;
                         align-items: center;
                         margin-bottom: 1rem;
+                        cursor: pointer;
     
                         label {
                             display: flex;
                             align-items: center;
-                            cursor: pointer;
+                            
+                        }
+                        
+                        .checkbox {
+                            display: none;
+                            position: absolute;
+
+                            &:checked + .field { 
+                                color: $clr-dark;
+                                background-color: #44e15f;
+                                border-color: #2b933c;
+
+                                box-shadow: 0rem 0rem 0.8rem rgba($color: #44e15f, $alpha: 0.8);
+
+                                @include default-transition();
+                            }
+
+                            &:checked ~ i {
+                                filter: brightness(1.5) contrast(1.5);
+                                @include default-transition();
+                            }
+
+                        }
+
+                        .field {
+                            margin: 0;
+                            font-size: 1rem;
+                            color: $clr-light;
+                            border: solid $clr-dark;
+                            padding: 0.5rem;
+        
+                            width: 100%;
+                            padding-left: 2.5rem;
+        
+                            border-radius: 0.5rem;
+                            background-color: $clr-input-bg;
+                            border-width: 0.1rem;
+
+                            @include default-transition();
                         }
                     }
     
-                    .field {
-                        margin: 0;
-                        font-size: 1rem;
-                        color: $clr-light;
-                        border: solid $clr-dark;
-                        padding: 0.5rem;
-    
-                        width: 100%;
-                        padding-left: 2.5rem;
-    
-                        border-radius: 0.5rem;
-                        background-color: $clr-input-bg;
-                        border-width: 0.1rem;
-    
-    
-                        &:focus {
-                            outline: none;
-                        }
-                    }
                 }
-            }
-            
-            
-            @mixin icon($icon) {
-                padding-left: 1rem;
-                background: url($icon) no-repeat left;
-                background-size: 1.5rem;
-                position: absolute;
-                display: block;
-                height: 1.5rem;
-                width: 1.5rem;
-                left: 0.5rem;
-            }
-            .letter-A {
-                @include icon('../svg/Letter\ A.svg');
-            }
-            .letter-B {
-                @include icon('../svg/Letter\ B.svg');
-            }
-            .letter-C {
-                @include icon('../svg/Letter\ C.svg');
-            }
-            .letter-D {
-                @include icon('../svg/Letter\ D.svg');
-            }
-    
-    
+            }    
         }
     }
 
@@ -123,7 +118,7 @@
         background-color: $clr-input-bg;
         border-width: 0.1rem;
 
-        transition: ease-in 0.3s;
+        @include default-transition();
 
         &:hover {
             box-shadow: 0rem 0rem 0.8rem #58a6bc;
@@ -132,11 +127,27 @@
             transform: scale(1.05);
             cursor: pointer;
 
-            transition: ease-in 0.3s;
+            @include default-transition();
         }
     }
 
     #previous {
+        color: $clr-light;
+        border: none;
+        text-decoration: underline;
+        text-underline-offset: 0.2rem;
+        text-decoration-thickness: 0.05rem;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-bottom: 1rem;
+    }
+
+    #check {
+        $value: 5rem;
+
+        margin-left: $value;
+        margin-right: $value;
+
         color: $clr-light;
         border: none;
         text-decoration: underline;

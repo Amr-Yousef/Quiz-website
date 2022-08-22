@@ -8,9 +8,6 @@
         <header>
             Question
         </header>
-        <p id="seed">
-            Seed: SOON! <!-- Make it so when the seed is clicked, a link to this quiz is copied. -->
-        </p>
         <p>
             UUID: <a id="uuid"></a>
         </p>
@@ -25,28 +22,33 @@
             <div class="answers">
                 <div class="option">
                     <div class="option-fields">
-                        <div class="option-container">
+                        <label class="option-container" for="option-a">
+                            <input type="checkbox" name="answer" class="checkbox" id="option-a" value="a"/>
+                            <p class="field" id="a"><span>&#8203;</span></p>
                             <i class="letter-A"></i>
-                            <p class="field" id="a">This is the first choice.</p>
-                        </div>
-                        <div class="option-container">
+                        </label>
+                        <label class="option-container" for="option-b">
+                            <input type="checkbox" name="answer" class="checkbox" id="option-b" value="b"/>
+                            <p class="field" id="b"><span>&#8203;</span></p>
                             <i class="letter-B"></i>
-                            <p type="text" class="field" id="b">This is the second choice.</p>
-                        </div>
-                        <div class="option-container">
+                        </label>
+                        <label class="option-container" for="option-c">
+                            <input type="checkbox" name="answer" class="checkbox" id="option-c" value="c"/>
+                            <p class="field" id="c"><span>&#8203;</span></p>
                             <i class="letter-C"></i>
-                            <p type="text" class="field" id="c">This is the third choice.</p>
-                        </div>
-                        <div class="option-container">
+                        </label>
+                        <label class="option-container" for="option-d">
+                            <input type="checkbox" name="answer" class="checkbox" id="option-d" value="d"/>
+                            <p class="field" id="d"><span>&#8203;</span></p>
                             <i class="letter-D"></i>
-                            <p type="text" class="field" id="d">This is the fourth choice.</p>
-                        </div>
+                        </label>
                     </div>
                 </div>
             </div>
         </div>
         <div class="buttons">
             <button class="button" id="previous">Previous question</button>
+            <button class="button" id="check" onclick="checkAnswer()">Check answer</button>
             <button class="button" id="next">Next</button>
         </div>
     </div>

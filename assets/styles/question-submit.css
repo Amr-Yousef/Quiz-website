@@ -1,4 +1,48 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+.letter-A {
+  padding-left: 1rem;
+  background: url("../svg/Letter A.svg") no-repeat left;
+  background-size: 1.5rem;
+  position: absolute;
+  display: block;
+  height: 1.5rem;
+  width: 1.5rem;
+  left: 0.5rem;
+}
+
+.letter-B {
+  padding-left: 1rem;
+  background: url("../svg/Letter B.svg") no-repeat left;
+  background-size: 1.5rem;
+  position: absolute;
+  display: block;
+  height: 1.5rem;
+  width: 1.5rem;
+  left: 0.5rem;
+}
+
+.letter-C {
+  padding-left: 1rem;
+  background: url("../svg/Letter C.svg") no-repeat left;
+  background-size: 1.5rem;
+  position: absolute;
+  display: block;
+  height: 1.5rem;
+  width: 1.5rem;
+  left: 0.5rem;
+}
+
+.letter-D {
+  padding-left: 1rem;
+  background: url("../svg/Letter D.svg") no-repeat left;
+  background-size: 1.5rem;
+  position: absolute;
+  display: block;
+  height: 1.5rem;
+  width: 1.5rem;
+  left: 0.5rem;
+}
+
 * {
   background-color: #2d3434;
   font-family: "Work Sans", sans-serif;
@@ -24,7 +68,7 @@
   font-size: 5rem;
   font-weight: 500;
   text-transform: uppercase;
-  transition: all 0.3s ease-in-out;
+  transition: ease-in 0.3s;
 }
 .title header a:hover {
   font-size: 5.1rem;
@@ -185,46 +229,6 @@
   background-size: contain;
   transform: scale(0);
   transition: ease-in 0.3s;
-}
-.container .form .answers .letter-A {
-  padding-left: 1rem;
-  background: url("../svg/Letter A.svg") no-repeat left;
-  background-size: 1.5rem;
-  position: absolute;
-  display: block;
-  height: 1.5rem;
-  width: 1.5rem;
-  left: 0.5rem;
-}
-.container .form .answers .letter-B {
-  padding-left: 1rem;
-  background: url("../svg/Letter B.svg") no-repeat left;
-  background-size: 1.5rem;
-  position: absolute;
-  display: block;
-  height: 1.5rem;
-  width: 1.5rem;
-  left: 0.5rem;
-}
-.container .form .answers .letter-C {
-  padding-left: 1rem;
-  background: url("../svg/Letter C.svg") no-repeat left;
-  background-size: 1.5rem;
-  position: absolute;
-  display: block;
-  height: 1.5rem;
-  width: 1.5rem;
-  left: 0.5rem;
-}
-.container .form .answers .letter-D {
-  padding-left: 1rem;
-  background: url("../svg/Letter D.svg") no-repeat left;
-  background-size: 1.5rem;
-  position: absolute;
-  display: block;
-  height: 1.5rem;
-  width: 1.5rem;
-  left: 0.5rem;
 }
 .container .form .buttons {
   display: flex;

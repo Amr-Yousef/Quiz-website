@@ -1,3 +1,5 @@
+questionAnswer = [];
+
 function shuffle(array) {  // Totally did not copy this from stack overflow. Also: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
     let currentIndex = array.length,  randomIndex;
   
@@ -16,6 +18,11 @@ function shuffle(array) {  // Totally did not copy this from stack overflow. Als
     return array;
 }
 
+function compareArr( arr1, arr2 ) {  // Again, totally did not copy this from stack overflow. https://stackoverflow.com/questions/29648234/is-there-a-way-to-check-if-two-arrays-have-the-same-elements
+    return  $( arr1 ).not( arr2 ).length === 0 && $( arr2 ).not( arr1 ).length === 0;  
+}
+  
+
 $.ajax({
     url: 'http://127.0.0.1:8000/api/quiz/random',
     type: 'GET',
@@ -25,16 +32,34 @@ $.ajax({
         
         alphabet = ['a', 'b', 'c', 'd'];
         choices = JSON.parse(String(data.choices));
+        questionAnswer = JSON.parse(String(data.answer));
 
-        console.log("Original: " + choices);
         shuffle(choices);
-        console.log("Shuffled: " + choices);
 
         $.each(choices, function(index, value) {
             $("#" + alphabet[index]).text(value);
         });
-
-        
-        
     }
 });
+
+function checkAnswer(){
+    let checkedAnswer = [];
+    $("[name='answer']").each(function() {
+        if ($(this).is(':checked')) {
+            checkedAnswer.push($("#" + $(this).val()).text());
+        }
+    });
+
+    if (checkedAnswer.length == 0) {
+        alert("Please select an answer.");
+        return;
+    }
+
+    console.log(checkedAnswer);
+    console.log(questionAnswer);
+    if(compareArr(checkedAnswer, questionAnswer)) {
+        alert("Correct!");
+    } else {
+        alert("Nope. Try again!");
+    }
+}
