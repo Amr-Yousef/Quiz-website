@@ -25,8 +25,8 @@ function submitQuestion() {
         type: 'POST',
         data: JSON.stringify(data),
         success: function (data) {
-            alert("success");
-            console.log(data);
+            $('#question-form').trigger("reset");
+            alert("Question has been submitted successfully!");
         }
     });
     return false;
