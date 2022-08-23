@@ -24,7 +24,7 @@ function submitQuestion() {
         url: 'http://127.0.0.1:8000/api/question',
         type: 'POST',
         data: JSON.stringify(data),
-        success: function (data) {
+        success: function (response) {
             $('#question-form').trigger("reset");
             alert("Question has been submitted successfully!");
         }
