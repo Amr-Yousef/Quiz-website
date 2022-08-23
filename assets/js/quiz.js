@@ -36,6 +36,10 @@ $.ajax({
 
         shuffle(choices);
 
+        for (let i = choices.length; i < 4; i++) {  // Removes extra empty choices.
+            $("#" + alphabet[i]).parent().hide();
+        }
+
         $.each(choices, function(index, value) {
             $("#" + alphabet[index]).text(value);
         });

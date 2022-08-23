@@ -35,7 +35,7 @@ function submitQuestion() {
     let choices = [];
     let trueOrFalse = $('input[type=radio][name=tfradio]:checked').val();
 
-    if(trueOrFalse == 'yes') {  // There is probably a better way to do this.
+    if(trueOrFalse == 'yes') {  // There is probably a better way to do this. Perhaps some loop that will generalize this part more, allowing for flexible number of choices.
         choices = [$("#a").val(), $("#b").val()];
     } else {
         choices = [
@@ -69,6 +69,7 @@ function submitQuestion() {
 function resetForm() {
     $('#question-form').trigger("reset");
 
+    // In case true or false is selected, this will make sure the form is reset correctly.
     $("#a").val('');
     $("#a").removeAttr('disabled');
     $("#b").val('');
