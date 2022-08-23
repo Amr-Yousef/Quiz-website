@@ -1,3 +1,27 @@
+$(document).ready(function () {
+    $('input[type=radio][name=tfradio]').change(function() {  // This looks ugly, and when things look ugly then there is probably a better way to do it.
+        if (this.value == 'yes') {
+            $("#a").val("True");
+            $("#a").attr('disabled', true);
+            $("#b").val("False");
+            $("#b").attr('disabled', true);
+
+            $("#c").parent().hide();
+            $("#d").parent().hide();
+        }
+        else if (this.value == 'no') {
+            $("#a").val('');
+            $("#a").removeAttr('disabled');
+            $("#b").val('');
+            $("#b").removeAttr('disabled');
+
+            $("#c").parent().show();
+            $("#d").parent().show();
+        }
+    });
+});
+
+
 function getAnswer() {
     answers = [];
     $('input[name="answer"]:checked').each(function () {
@@ -8,15 +32,24 @@ function getAnswer() {
 
 function submitQuestion() {
 
+    let choices = [];
+    let trueOrFalse = $('input[type=radio][name=tfradio]:checked').val();
+
+    if(trueOrFalse == 'yes') {  // There is probably a better way to do this.
+        choices = [$("#a").val(), $("#b").val()];
+    } else {
+        choices = [
+            $("#a").val(),
+            $("#b").val(),
+            $("#c").val(),
+            $("#d").val()
+        ]
+    }
+
     let data = {
         title: $('#title').val(),
         tfradio: $('input[name="tfradio"]:checked').val(),
-        choices: [  // There is probably a better way to do this
-            $('#a').val(),
-            $('#b').val(),
-            $('#c').val(),
-            $('#d').val()
-        ], 
+        choices: choices, 
         answer: getAnswer(),
     };
 
@@ -25,9 +58,23 @@ function submitQuestion() {
         type: 'POST',
         data: JSON.stringify(data),
         success: function (response) {
-            $('#question-form').trigger("reset");
+            
+            resetForm();
             alert("Question has been submitted successfully!");
         }
     });
     return false;
 }
+
+function resetForm() {
+    $('#question-form').trigger("reset");
+
+    $("#a").val('');
+    $("#a").removeAttr('disabled');
+    $("#b").val('');
+    $("#b").removeAttr('disabled');
+
+    $("#c").parent().show();
+    $("#d").parent().show();
+}
+
