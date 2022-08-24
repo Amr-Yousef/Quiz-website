@@ -1,4 +1,45 @@
+questions = [];
 questionAnswer = [];
+questionNumber = 0;
+alphabet = ['a', 'b', 'c', 'd'];
+
+$(document).ready(function() {
+    $.ajax({
+        url: 'http://127.0.0.1:8000/api/quiz/random/3', // The 5 should be replaced with the number of questions user inputs.
+        type: 'GET',
+        success: function (data) {
+            questions = data;
+            displayQuestion(questions[questionNumber]);
+        }
+    });
+
+    $('#next').click(function() {
+        if(checkAnswer() == true) {
+            alert("Correct!");
+        } else if (checkAnswer() == false) {
+            alert("Incorrect!");
+        } else {
+            alert("Please select an answer.");
+        }
+
+
+        if (questionNumber < questions.length - 1) {  // Making the value -2 instead of -1 will execute the code inside the if statement on the last question.
+            questionNumber++;
+            displayQuestion(questions[questionNumber]);
+        } else {
+            $('#next').hide();
+        }
+    });
+
+    $("#previous").click(function() {
+        if (questionNumber > 0) {
+            questionNumber--;
+            displayQuestion(questions[questionNumber]);
+        }
+    });
+});
+
+
 
 function shuffle(array) {  // Totally did not copy this from stack overflow. Also: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
     let currentIndex = array.length,  randomIndex;
@@ -21,30 +62,6 @@ function shuffle(array) {  // Totally did not copy this from stack overflow. Als
 function compareArr( arr1, arr2 ) {  // Again, totally did not copy this from stack overflow. https://stackoverflow.com/questions/29648234/is-there-a-way-to-check-if-two-arrays-have-the-same-elements
     return  $( arr1 ).not( arr2 ).length === 0 && $( arr2 ).not( arr1 ).length === 0;  
 }
-  
-
-$.ajax({
-    url: 'http://127.0.0.1:8000/api/quiz/random',
-    type: 'GET',
-    success: function (data) {
-        $('#q-title').text(data.title);
-        $('#uuid').text(data.id);
-        
-        alphabet = ['a', 'b', 'c', 'd'];
-        choices = JSON.parse(String(data.choices));
-        questionAnswer = JSON.parse(String(data.answer));
-
-        shuffle(choices);
-
-        for (let i = choices.length; i < 4; i++) {  // Removes extra empty choices.
-            $("#" + alphabet[i]).parent().hide();
-        }
-
-        $.each(choices, function(index, value) {
-            $("#" + alphabet[index]).text(value);
-        });
-    }
-});
 
 function checkAnswer(){
     let checkedAnswer = [];
@@ -55,15 +72,44 @@ function checkAnswer(){
     });
 
     if (checkedAnswer.length == 0) {
-        alert("Please select an answer.");
-        return;
+        return -1;
     }
 
-    console.log(checkedAnswer);
-    console.log(questionAnswer);
     if(compareArr(checkedAnswer, questionAnswer)) {
-        alert("Correct!");
+        return true;
     } else {
-        alert("Nope. Try again!");
+        return false;
     }
 }
+
+function displayQuestion(question) {
+    resetChoices();
+
+    $('#q-title').text(question.title);
+    $('#uuid').text(question.id);
+    
+
+    let choices = JSON.parse(String(question.choices));
+    questionAnswer = JSON.parse(String(question.answer));
+
+    shuffle(choices);
+
+    for (let i = choices.length; i < 4; i++) {  // Removes extra empty choices.
+        $("#" + alphabet[i]).parent().hide();
+    }
+
+    $.each(choices, function(index, value) {  // Displays the choices.
+        $("#" + alphabet[index]).text(value);
+    });
+}
+
+function resetChoices() {
+    $("[name='answer']").each(function() {
+        $(this).prop('checked', false);
+    });
+
+    for (let i = 0; i < 4; i++) {  // Resets the choices fields to their default amount(4).
+        $("#" + alphabet[i]).parent().show();
+    }
+}
+

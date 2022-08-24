@@ -35,6 +35,7 @@ async def root():
     result = session.query(questions).all()
     return result
 
+
 @app.get("/api/question/{id}")
 async def root(id: str):
     metadata = MetaData()
@@ -42,16 +43,6 @@ async def root(id: str):
     session = Session()
 
     result = session.query(questions).filter(questions.c.id == id).first()
-    return result
-
-@app.get("/api/quiz/random")
-async def root():
-    metadata = MetaData()
-    questions = Table('questions', metadata, autoload=True, autoload_with=engine)
-    session = Session()
-
-    rand = random.randrange(0, session.query(questions).count())
-    result = session.query(questions)[rand]
     return result
 
 
@@ -74,3 +65,30 @@ async def root(info: Request):
         "status" : "Question Added",
         "data" : req_info
     }
+
+
+@app.get("/api/quiz/random")
+async def root():
+    metadata = MetaData()
+    questions = Table('questions', metadata, autoload=True, autoload_with=engine)
+    session = Session()
+
+    rand = random.randrange(0, session.query(questions).count())
+    result = session.query(questions)[rand]
+    return result
+
+
+@app.get("/api/quiz/random/{amount}")
+async def root(amount: int):
+    metadata = MetaData()
+    questions = Table('questions', metadata, autoload=True, autoload_with=engine)
+    session = Session()
+
+    # TODO: Add a check to make sure the amount is less than the number of questions in the database, if not return an error message.
+    rand = random.sample(range(0, session.query(questions).count()), amount)
+
+    result = []
+    for num in rand:
+        result.append(session.query(questions)[num])
+        
+    return result
