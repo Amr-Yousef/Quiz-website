@@ -1,0 +1,7 @@
+@import "base"; 
+
+* {
+    background-color: $clr-bg;
+    font-family: 'Work Sans', sans-serif;
+    color: $clr-light;  // TODO: Apparently this will apply to all text in the website, so I don't need to write it individually for each element. Fix that in other pages.
+}
