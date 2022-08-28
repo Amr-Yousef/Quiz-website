@@ -43,8 +43,136 @@
   left: 0.5rem;
 }
 
-* {
+.nav-container {
+  display: flex;
+  justify-content: space-around;
+}
+.nav-container .navbar {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  min-width: 30vw;
+}
+.nav-container .navbar a {
+  text-decoration: none;
+  color: #e7f6f2;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  border-bottom: 0.1rem solid rgba(231, 246, 242, 0);
+  transition: ease-in 0.3s;
+}
+.nav-container .navbar a:hover {
+  border-bottom: 0.1rem solid #e7f6f2;
+  transition: ease-in 0.3s;
+  transform: translateY(-0.1rem);
+}
+
+.default-button {
+  margin: 0 5rem;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+  color: #e7f6f2;
+  border: solid #3a5c65;
+  border-radius: 0.5rem;
+  background-color: rgba(58, 92, 101, 0.3);
+  border-width: 0.1rem;
+  transition: ease-in 0.3s;
+}
+.default-button:hover {
+  box-shadow: 0rem 0rem 0.8rem #58a6bc;
+  border-color: #58a6bc;
+  background-color: #58a6bc;
+  transform: scale(1.05);
+  cursor: pointer;
+  transition: ease-in 0.3s;
+}
+
+body {
   background-color: #2d3434;
   font-family: "Work Sans", sans-serif;
   color: #e7f6f2;
+}
+
+.cards {
+  display: inline-grid;
+  grid-template-columns: auto auto auto;
+}
+.cards .card-container {
+  max-width: 20vw;
+  background-color: rgba(231, 246, 242, 0.1);
+  border-radius: 2.5rem;
+  position: relative;
+  margin: 4rem;
+  padding: 2.5rem 1.5rem;
+}
+.cards .card-container .shadow {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  filter: blur(0.7rem);
+  border-radius: 2.5rem;
+}
+.cards .card-container .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cards .card-container .content .title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 2rem 0 0 0;
+}
+.cards .card-container .content p {
+  text-align: justify;
+  -moz-text-align-last: center;
+       text-align-last: center;
+  font-size: 0.9rem;
+  font-weight: 300;
+  margin: 2rem 0;
+}
+.cards .card-container .content .start-btn-container {
+  margin: 1rem 0 0 0;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.cards .card-container .content .start-btn-container .start-btn {
+  display: flex;
+  align-items: center;
+}
+.cards .card-container .content .start-btn-container .start-btn button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  color: #e7f6f2;
+  text-underline-offset: 0.3rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: cubic-bezier(0, 0, 0.25, 1) 0.3s;
+}
+.cards .card-container .content .start-btn-container .start-btn button:hover {
+  transform: scale(1.05);
+  transition: cubic-bezier(0, 0, 0.25, 1) 0.3s;
+}
+.cards .card-container .content .start-btn-container .start-btn button:hover + .arrow {
+  transform: translateX(1.5rem);
+  transition: cubic-bezier(0, 0, 0.25, 1) 0.3s;
+}
+.cards .card-container .content .start-btn-container .start-btn .arrow {
+  margin-left: 1rem;
+  margin-right: 2rem;
+  transition: cubic-bezier(0, 0, 0.25, 1) 0.3s;
+}
+.cards .card-container .content .start-btn-container .start-btn .arrow img {
+  width: 0.6rem;
 }/*# sourceMappingURL=takequiz.css.map */

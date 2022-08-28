@@ -5,44 +5,12 @@
     font-family: 'Work Sans', sans-serif;
 }
 
-.nav-container {
-    display: flex;
-    justify-content: space-around;
-
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 1rem;
-        min-width: 30vw;
-
-        a {
-            text-decoration: none;
-            
-            color: $clr-light;
-
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1rem;
-
-            border-bottom: 0.1rem solid rgba($color: $clr-light, $alpha: 0);
-            @include default-transition;
-
-            &:hover {
-                border-bottom: 0.1rem solid $clr-light;
-                @include default-transition;
-                transform: translateY(-0.1rem);
-            }
-        }
-    }
-}
-
 .welcome-container {
     display: flex;
     max-width: 100vw;
     flex-direction: row;
     align-items: center;
-    margin: 0 5vw;
+    margin: 0 4vw;
     margin-top: 5rem;
 
     .title {

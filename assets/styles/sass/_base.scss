@@ -33,3 +33,72 @@ $clr-bg: #2d3434;
 @mixin default-transition {
     transition: ease-in 0.3s;
 }
+
+@mixin ease-in-transition {
+    transition: cubic-bezier(0, 0, 0.25, 1) 0.3s;
+}
+    
+
+@mixin text-justify {
+    text-align: justify;
+    text-align-last: center;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-around;
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+        min-width: 30vw;
+
+        a {
+            text-decoration: none;
+            
+            color: $clr-light;
+
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+
+            border-bottom: 0.1rem solid rgba($color: $clr-light, $alpha: 0);
+            @include default-transition;
+
+            &:hover {
+                border-bottom: 0.1rem solid $clr-light;
+                @include default-transition;
+                transform: translateY(-0.1rem);
+            }
+        }
+    }
+}
+
+.default-button {  // TODO: Replace the buttons in other pages with this one.
+    margin: 0 5rem;
+
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+
+    color: $clr-light;
+    border: solid $clr-dark;
+    border-radius: 0.5rem;
+    background-color: $clr-input-bg;
+    border-width: 0.1rem;
+
+    @include default-transition();
+
+    &:hover {
+        box-shadow: 0rem 0rem 0.8rem #58a6bc;
+        border-color: #58a6bc;
+        background-color: #58a6bc;
+        transform: scale(1.05);
+        cursor: pointer;
+
+        @include default-transition();
+    }
+}

@@ -1,7 +1,115 @@
-@import "base"; 
+@import "base";
 
-* {
+body {
+    // For some reason having this as '*' instead of 'body' causes some styles to not apply. Perhaps change this with the rest of the pages?
     background-color: $clr-bg;
     font-family: 'Work Sans', sans-serif;
-    color: $clr-light;  // TODO: Apparently this will apply to all text in the website, so I don't need to write it individually for each element. Fix that in other pages.
+    color: $clr-light; // TODO: Apparently this will apply to all text in the website, so I don't need to write it individually for each element. Fix that in other pages.
+}                      // or just put it in the _base.scss file.
+
+
+
+.cards {
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+
+    .card-container {
+        $round-radius: 2.5rem;
+
+        max-width: 20vw;
+        background-color: rgba($color: $clr-light, $alpha: 0.1);
+        border-radius: $round-radius;
+        position: relative;
+
+        margin: 4rem;
+
+        // box-shadow: 0 0 0.8rem rgba($color: black, $alpha: 0.5);
+        .shadow {
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba($color: black, $alpha: 0.25);
+            filter: blur(0.7rem);
+            border-radius: $round-radius;
+        }
+
+        padding: 2.5rem 1.5rem;
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .title {
+                font-size: 1.5rem;
+                font-weight: 700;
+
+                margin: 2rem 0 0 0;
+            }
+
+            p {
+                @include text-justify();
+                font-size: 0.9rem;
+                font-weight: 300;
+
+                margin: 2rem 0;
+            }
+
+            .start-btn-container {
+                margin: 1rem 0 0 0;
+                display: flex;
+                justify-content: flex-end;
+                width: 100%;
+
+                .start-btn {
+                    display: flex;
+                    align-items: center;
+
+                    button {
+                        background-color: transparent;
+                        border: none;
+
+                        cursor: pointer;
+
+                        text-decoration: underline;
+                        color: $clr-light;
+                        text-underline-offset: 0.3rem;
+                        text-transform: uppercase;
+
+                        font-weight: 700;
+                        font-size: 1.1rem;
+
+                        @include ease-in-transition();
+
+                        &:hover {
+                            transform: scale(1.05);
+                            @include ease-in-transition();
+                        }
+
+                        &:hover+.arrow {
+                            transform: translateX(1.5rem);
+                            @include ease-in-transition();
+                        }
+                    }
+
+                    .arrow {
+                        margin-left: 1rem;
+                        margin-right: 2rem;
+
+                        @include ease-in-transition();
+
+                        img {
+                            width: 0.6rem;
+
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
 }
