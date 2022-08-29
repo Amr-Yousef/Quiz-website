@@ -1,10 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../assets/styles/css/takequiz.css">
+    <link rel="stylesheet" type="text/css" href="../assets/styles/css/roquiz.css">
 </head>
 <body>
-    init
+    <div class="nav-container">
+        <nav class="navbar">
+            <div class="goback">
+                <a href="./takequiz.html">Go back</a>
+                <img src="../assets/svg/Arrow.svg" alt="goback">
+            </div>
+            <a href="./index.html">Home</a>
+        </nav>
+    </div>
+    <div class="main">
+        <div class="settings">
+            <div class="content-container">
+                <div class="field">
+                    <p class="title">Questions' set #</p>
+                    <div class="input-container">
+                        <i class="hashtag"></i>
+                        <input type="text" id="questionsSet" maxlength="10" placeholder="5AC73D">
+                    </div>
+                </div>
+                <div class="field">
+                    <p class="title">Number of questions</p>
+                    <input type="number" id="questionsNumber" min="1" placeholder="11">
+                </div>
+                <div class="field">
+                    <p class="title">Quiz Difficulty <em>(Average)</em></p>
+                    <div class="slider-container">
+                        <div class="ranges">
+                            <span class="range-value">Easy</span>
+                            <span class="range-value">Hard</span>
+                        </div>
+                        <input type="range" id="diffSlider" min="1" max="5" value="3">
+                        <div class="ranges">
+                            <span class="range-value">1</span>
+                            <span class="range-value">2</span>
+                            <span class="range-value">3</span>
+                            <span class="range-value">4</span>
+                            <span class="range-value">5</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="start">
+                    <div class="btn-container">
+                        <button class="default-button">START</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 <script src="../assets/js/roquiz.js"></script>

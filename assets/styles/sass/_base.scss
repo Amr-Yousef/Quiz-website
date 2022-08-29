@@ -18,16 +18,19 @@ $clr-bg: #2d3434;
     left: 0.5rem;
 }
 .letter-A {
-    @include icon('../svg/Letter\ A.svg');
+    @include icon('../../svg/Letter\ A.svg');
 }
 .letter-B {
-    @include icon('../svg/Letter\ B.svg');
+    @include icon('../../svg/Letter\ B.svg');
 }
 .letter-C {
-    @include icon('../svg/Letter\ C.svg');
+    @include icon('../../svg/Letter\ C.svg');
 }
 .letter-D {
-    @include icon('../svg/Letter\ D.svg');
+    @include icon('../../svg/Letter\ D.svg');
+}
+.hashtag {
+    @include icon('../../svg/hashtag.svg');
 }
 
 @mixin default-transition {
@@ -47,10 +50,12 @@ $clr-bg: #2d3434;
 .nav-container {
     display: flex;
     justify-content: space-around;
+    
 
     .navbar {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         margin-top: 1rem;
         min-width: 30vw;
 

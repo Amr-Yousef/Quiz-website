@@ -4,4 +4,151 @@ body {
     background-color: $clr-bg;
     font-family: 'Work Sans', sans-serif;
     color: $clr-light;
-}    
+}
+
+
+.nav-container {
+
+    .navbar {
+        width: 90%; // override the default width of the navbar
+
+        .goback {
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+
+            img {
+                width: 2rem;
+                @include ease-in-transition();
+            }
+
+            a {
+                margin-left: 1rem;
+
+                &:hover ~ img {
+                    transform: translateX(-1rem);
+
+                    @include ease-in-transition();
+                }
+            }
+        }
+    }
+}
+
+.main {
+    display: flex;
+    height: 88vh;
+    align-items: center;
+    justify-content: center;
+
+    .settings {
+        display: flex;
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            background: rgba($color: $clr-bg, $alpha: 0);
+            width: 25vw;
+
+            box-shadow: 0 0 1.3rem rgba($color: black, $alpha: 0.5);
+            padding: 0 3rem;
+            border-radius: 2rem;
+
+            .field {
+                margin: 1rem 0;
+
+                .title {
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    margin-bottom: 1rem;
+
+                    em {
+                        font-size: 0.8rem;
+                        font-weight: 400;
+                    }
+                }
+
+                .input-container {
+                    position: relative;
+
+                    #questionsSet {
+                        width: max-content;
+                        
+                        border-radius: 0.4rem;
+                        height: 1.5rem;
+    
+                        background-color: $clr-input-bg;
+                        color: $clr-light;
+                        border: solid 2px $clr-dark;
+                        
+                        font-weight: 600;
+                        font-size: 1rem;
+                        padding-left: 2rem;
+                        letter-spacing: 0.5rem;
+                        text-transform: uppercase;
+
+                        &:focus {
+                            outline: none;
+                            border: solid 2px $clr-medium;
+                        }
+                    }
+
+                    .hashtag {
+                        background-size: 1rem;
+                        height: 1.8rem;
+                    }
+
+                }
+                
+                #questionsNumber {
+                    border-radius: 0.4rem;
+                    height: 1.5rem;
+                    width: 5rem;
+
+                    background-color: $clr-input-bg;
+                    color: $clr-light;
+                    border: solid 2px $clr-dark;
+                    
+                    font-weight: 600;
+                    font-size: 1rem;
+                    padding: 0rem 0.5rem;
+
+                    &:focus {
+                        outline: none;
+                        border: solid 2px $clr-medium;
+                    }
+                }
+
+                .slider-container {
+                    display: flex;
+                    justify-content: space-around;
+                    flex-direction: column;
+                    align-items: center;
+
+                    #diffSlider {
+                        width: 80%;
+
+                        //  Maybe add more style to it? You tried but it was too much of a hastle for such a tiny detail for now.
+                    }
+
+                    .ranges {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        width: 80%;
+                    }
+                }
+            }
+
+            .start {
+                
+                .btn-container {
+                    display: flex;
+                    justify-content: space-around;
+                    margin: 2rem 0;
+                }
+            }
+            
+        }
+    }
+}
