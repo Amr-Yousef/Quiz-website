@@ -50,6 +50,11 @@ body {
                 margin: 2rem 0 0 0;
             }
 
+            img {
+                width: 50%;
+                height: 50%;
+            }
+
             p {
                 @include text-justify();
                 font-size: 0.9rem;
@@ -68,12 +73,7 @@ body {
                     display: flex;
                     align-items: center;
 
-                    button {
-                        background-color: transparent;
-                        border: none;
-
-                        cursor: pointer;
-
+                    a {
                         text-decoration: underline;
                         color: $clr-light;
                         text-underline-offset: 0.3rem;
@@ -102,8 +102,8 @@ body {
                         @include ease-in-transition();
 
                         img {
-                            width: 0.6rem;
-
+                            width: 0.8rem;
+                            rotate: 180deg;
                         }
                     }
                 }
