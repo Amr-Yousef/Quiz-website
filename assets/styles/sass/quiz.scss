@@ -54,6 +54,9 @@
                         align-items: center;
                         margin-bottom: 1rem;
                         cursor: pointer;
+
+                        border-radius: 0.5rem;
+                        @include ease-in-transition();
     
                         label {
                             display: flex;
@@ -97,6 +100,13 @@
                             border-width: 0.1rem;
 
                             @include default-transition();
+                        }
+
+                        &:hover {
+                            transform: scale(1.05);
+                            box-shadow: 0rem 0rem 0.5rem rgba($color: $clr-dark, $alpha: 0.8);
+                            
+                            @include ease-in-transition();
                         }
                     }
     
