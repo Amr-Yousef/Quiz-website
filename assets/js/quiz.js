@@ -2,10 +2,11 @@ questions = [];
 questionAnswer = [];
 questionNumber = 0;
 alphabet = ['a', 'b', 'c', 'd'];
+settings = JSON.parse(sessionStorage.getItem("fields"));
 
 $(document).ready(function() {
     $.ajax({
-        url: 'http://127.0.0.1:8000/api/quiz/random/3', // The 5 should be replaced with the number of questions user inputs.
+        url: 'http://127.0.0.1:8000/api/quiz/random/' + settings['numberOfQuestions'],
         type: 'GET',
         success: function (data) {
             questions = data;
@@ -31,7 +32,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#previous").click(function() {
+    $("#previous").click(function() {  // TODO: Make the website reload the previous question's answers.
         if (questionNumber > 0) {
             questionNumber--;
             displayQuestion(questions[questionNumber]);
@@ -87,6 +88,8 @@ function displayQuestion(question) {
 
     $('#q-title').text(question.title);
     $('#uuid').text(question.id);
+    $('#questionNo').text(questionNumber + 1);
+    $('#totalQuestions').text(questions.length);
     
 
     let choices = JSON.parse(String(question.choices));

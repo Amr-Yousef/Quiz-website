@@ -51,10 +51,9 @@ async def root(info: Request):
     req_info = await info.json()
     
     # Now we will add th question to the database
-    metadata = MetaData()
-    questions = Table('questions', metadata, autoload=True, autoload_with=engine)
     session = Session()
 
+    # In case you were wondering like me to how it knows what table to insert into, it's because we specified the table name in the Question class.
     new_question = Question(id=str(uuid.uuid4()), title=req_info['title'], choices=json.dumps(req_info['choices']), answer=json.dumps(req_info['answer']))
     session.add(new_question)
     session.commit()
@@ -92,3 +91,4 @@ async def root(amount: int):
         result.append(session.query(questions)[num])
         
     return result
+
