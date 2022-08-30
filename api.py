@@ -92,3 +92,30 @@ async def root(amount: int):
         
     return result
 
+@app.get("/api/quiz/set/{setCode}")
+async def root(setCode: str):
+    metadata = MetaData()
+    questionsSet = Table('questions_sets', metadata, autoload=True, autoload_with=engine)
+    session = Session()
+
+    result = session.query(questionsSet).filter(questionsSet.c.set_code == setCode).first()
+
+    return result
+
+@app.get("/api/quiz/set/{setCode}/{numberOfQuestions}")
+async def root(setCode: str, numberOfQuestions: int):
+    metadata = MetaData()
+    questionsSet = Table('questions_sets', metadata, autoload=True, autoload_with=engine)
+    questions = Table('questions', metadata, autoload=True, autoload_with=engine)
+    session = Session()
+
+    setObj = session.query(questionsSet).filter(questionsSet.c.set_code == setCode).first()
+    setQuestions = json.loads(setObj.questions_uuid)
+    
+    UUIDArray = random.sample(setQuestions, numberOfQuestions)
+
+    result = []
+    for questionUUID in UUIDArray:
+        result.append(session.query(questions).filter(questions.c.id == questionUUID).first())
+
+    return result
