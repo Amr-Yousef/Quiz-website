@@ -5,8 +5,9 @@ alphabet = ['a', 'b', 'c', 'd'];
 settings = JSON.parse(sessionStorage.getItem("fields"));
 
 $(document).ready(function() {
+    let seturl = settings.set + '/' + settings.numberOfQuestions;
     $.ajax({
-        url: 'http://127.0.0.1:8000/api/quiz/random/' + settings['numberOfQuestions'],
+        url: 'http://127.0.0.1:8000/api/quiz/set/' +  seturl,
         type: 'GET',
         success: function (data) {
             questions = data;
