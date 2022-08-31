@@ -1,0 +1,78 @@
+@import "base";
+
+body {
+    background-color: $clr-bg;
+    font-family: 'Work Sans', sans-serif;
+    color: $clr-light;
+}
+
+.nav-container {
+
+    .navbar {
+        width: 90%; // override the default width of the navbar
+
+        .links {
+            a {
+                margin-left: 4rem;
+            }
+        }
+
+        .goback {
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+
+            img {
+                width: 2rem;
+                @include ease-in-transition();
+            }
+
+            a {
+                margin-left: 1rem;
+
+                &:hover ~ img {
+                    transform: translateX(-1rem);
+
+                    @include ease-in-transition();
+                }
+            }
+        }
+    }
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .message {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+
+        .motivational-title {
+            font-size: 5rem;
+            font-weight: 600;
+
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .score {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+
+            span {
+                font-weight: 600;
+            }
+        }
+
+        .percentage {
+            font-size: 5rem;
+            font-weight: 500;
+            margin-bottom: 4rem;
+        }
+    }
+}

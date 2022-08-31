@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../assets/styles/css/quizend.css">
+</head>
+<body>
+    <div class="nav-container">
+        <nav class="navbar">
+            <div class="goback">
+                <a href="./roquiz.html">Go back</a>
+                <img src="../assets/svg/Arrow.svg" alt="goback">
+            </div>
+            <div class="links">
+                <a href="./index.html">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </div>
+    <div class="main">
+        <div class="message">
+            <div class="motivational-title">Well done!</div>  <!-- This should change based on the score. -->
+            <div class="score">
+                You got <span id="current">8</span> out of <span id="total">10</span> questions correct! Which is:
+            </div>
+            <div class="percentage">80%</div>
+            <div class="buttons">
+                <button class="default-button">Re-take</button>
+                <button class="default-button">Go home</button>
+                <button class="default-button">Share</button>
+            </div>
+        </div>
+        <div class="question-table">
+
+        </div>
+    </div>
+</body>
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
+<script src="../assets/js/quizend.js"></script>
+</html>

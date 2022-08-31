@@ -1,0 +1,164 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+.letter-A {
+  padding-left: 1rem;
+  background: url("../../svg/Letter A.svg") no-repeat left;
+  background-size: 1.5rem;
+  position: absolute;
+  display: block;
+  height: 1.5rem;
+  width: 1.5rem;
+  left: 0.5rem;
+}
+
+.letter-B {
+  padding-left: 1rem;
+  background: url("../../svg/Letter B.svg") no-repeat left;
+  background-size: 1.5rem;
+  position: absolute;
+  display: block;
+  height: 1.5rem;
+  width: 1.5rem;
+  left: 0.5rem;
+}
+
+.letter-C {
+  padding-left: 1rem;
+  background: url("../../svg/Letter C.svg") no-repeat left;
+  background-size: 1.5rem;
+  position: absolute;
+  display: block;
+  height: 1.5rem;
+  width: 1.5rem;
+  left: 0.5rem;
+}
+
+.letter-D {
+  padding-left: 1rem;
+  background: url("../../svg/Letter D.svg") no-repeat left;
+  background-size: 1.5rem;
+  position: absolute;
+  display: block;
+  height: 1.5rem;
+  width: 1.5rem;
+  left: 0.5rem;
+}
+
+.hashtag {
+  padding-left: 1rem;
+  background: url("../../svg/hashtag.svg") no-repeat left;
+  background-size: 1.5rem;
+  position: absolute;
+  display: block;
+  height: 1.5rem;
+  width: 1.5rem;
+  left: 0.5rem;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-around;
+}
+.nav-container .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  min-width: 30vw;
+}
+.nav-container .navbar a {
+  text-decoration: none;
+  color: #e7f6f2;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  border-bottom: 0.1rem solid rgba(231, 246, 242, 0);
+  transition: ease-in 0.3s;
+}
+.nav-container .navbar a:hover {
+  border-bottom: 0.1rem solid #e7f6f2;
+  transition: ease-in 0.3s;
+  transform: translateY(-0.1rem);
+}
+
+.default-button {
+  margin: 0 5rem;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+  color: #e7f6f2;
+  border: solid #3a5c65;
+  border-radius: 0.5rem;
+  background-color: rgba(58, 92, 101, 0.3);
+  border-width: 0.1rem;
+  transition: ease-in 0.3s;
+}
+.default-button:hover {
+  box-shadow: 0rem 0rem 0.8rem #58a6bc;
+  border-color: #58a6bc;
+  background-color: #58a6bc;
+  transform: scale(1.05);
+  cursor: pointer;
+  transition: ease-in 0.3s;
+}
+
+body {
+  background-color: #2d3434;
+  font-family: "Work Sans", sans-serif;
+  color: #e7f6f2;
+}
+
+.nav-container .navbar {
+  width: 90%;
+}
+.nav-container .navbar .links a {
+  margin-left: 4rem;
+}
+.nav-container .navbar .goback {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+.nav-container .navbar .goback img {
+  width: 2rem;
+  transition: cubic-bezier(0, 0, 0.25, 1) 0.3s;
+}
+.nav-container .navbar .goback a {
+  margin-left: 1rem;
+}
+.nav-container .navbar .goback a:hover ~ img {
+  transform: translateX(-1rem);
+  transition: cubic-bezier(0, 0, 0.25, 1) 0.3s;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main .message {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.main .message .motivational-title {
+  font-size: 5rem;
+  font-weight: 600;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+.main .message .score {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+.main .message .score span {
+  font-weight: 600;
+}
+.main .message .percentage {
+  font-size: 5rem;
+  font-weight: 500;
+  margin-bottom: 4rem;
+}/*# sourceMappingURL=quizend.css.map */
