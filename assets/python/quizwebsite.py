@@ -1,7 +1,5 @@
-import string
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
-import uuid
 
 class Question(declarative_base()):
     __tablename__ = 'questions'
@@ -9,3 +7,4 @@ class Question(declarative_base()):
     title = Column(String)
     choices = Column(String)
     answer = Column(String)
+    explanation = Column(String)

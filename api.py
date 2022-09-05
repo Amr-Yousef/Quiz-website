@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import json
 import random
 from unittest import result
@@ -53,8 +54,14 @@ async def root(info: Request):
     # Now we will add th question to the database
     session = Session()
 
+    # Since explanation is optional, we need to check if it is in the request. There is probably a "less ugly" way to do this
+    try:
+        new_question = Question(id=str(uuid.uuid4()), title=req_info['title'], choices=json.dumps(req_info['choices']), answer=json.dumps(req_info['answer']), explanation=req_info['explanation'])
+    except KeyError:
+        new_question = Question(id=str(uuid.uuid4()), title=req_info['title'], choices=json.dumps(req_info['choices']), answer=json.dumps(req_info['answer']))
+
     # In case you were wondering like me to how it knows what table to insert into, it's because we specified the table name in the Question class.
-    new_question = Question(id=str(uuid.uuid4()), title=req_info['title'], choices=json.dumps(req_info['choices']), answer=json.dumps(req_info['answer']))
+    
     session.add(new_question)
     session.commit()
 
