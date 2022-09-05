@@ -44,6 +44,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
     .message {
         display: flex;
@@ -73,6 +74,123 @@ body {
             font-size: 5rem;
             font-weight: 500;
             margin-bottom: 4rem;
+        }
+    }
+
+    .question-table {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: flex-start;
+
+        background-color: rgba($color: $clr-medium,  $alpha: 0.10);
+        border-radius: 1rem;
+        width: 85vw;
+        padding: 2rem;
+
+        margin-top: 5rem;
+
+        .table-header {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 1.5rem;
+            width: calc(100% - 0.5rem);
+
+            .question {
+                width: 62%;
+                text-align: center;
+            }
+
+            .answer {
+                width: 12%;
+                text-align: center;
+            }
+
+            .correct {
+                width: 12%;
+                text-align: center;
+            }
+
+        }
+
+        .table-rows {
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 500;
+
+            .row {
+                
+
+                .main {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    flex-direction: row;
+
+                    background-color: $clr-dark;
+                    border-radius: 0.8rem;
+                    padding: 0.5rem 1rem;
+                    
+                    box-shadow: 0rem 0rem 0.8rem rgba($color: black, $alpha: 0.2);
+
+                    .number {
+                        width: 2%;
+                        font-size: 1.5rem;
+                        font-weight: 700;
+                    }
+
+                    .title {
+                        display: flex;
+                        width: 60%
+                    }
+
+                    .default-cell {
+                        width: 12%;
+                        text-align: center;
+                    }
+
+                    #status {
+                        color: rgb(68, 197, 68);
+                    }
+
+                    .arrow {
+                        @include ease-in-transition();
+                        width: 2%;
+                        transform: rotate(-90deg);
+
+                        &:hover {
+                            transform: rotate(-90deg) translateX(-0.1rem);
+                            @include ease-in-transition();
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                .explanation {
+                    background-color: rgba($color: $clr-input-bg,  $alpha: 0.25);
+                    border-radius: 0 0 0.8rem 0.8rem;
+                    
+                    padding: 1rem;
+                    padding-top: 2rem;
+                    position: relative;
+                    top: -1rem;
+
+                    z-index: -1;
+                    display: none;
+
+                    @include ease-in-transition();
+
+                    .explanation-text {
+                        font-size: 1.1rem;
+                        font-weight: 300;
+                        margin: 1rem 0 0 1rem;
+
+                        text-align: justify;
+
+                        display: none;
+                    }
+                }
+            }
         }
     }
 }
