@@ -119,7 +119,7 @@ body {
             font-weight: 500;
 
             .row {
-                
+                margin-bottom: 1rem;
 
                 .main {
                     display: flex;
@@ -149,8 +149,12 @@ body {
                         text-align: center;
                     }
 
-                    #status {
+                    .correct {
                         color: rgb(68, 197, 68);
+                    }
+
+                    .wrong {
+                        color: rgba($color: #e84f51, $alpha: 1.0)
                     }
 
                     .arrow {
