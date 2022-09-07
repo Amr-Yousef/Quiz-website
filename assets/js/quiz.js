@@ -1,7 +1,10 @@
 questions = [];
 questionAnswer = [];
-questionNumber = 0;
+userAnswers = [];
+questionNumber = 0;  // This is a solution but it doesn't feel like the optimal one.
+
 alphabet = ['a', 'b', 'c', 'd'];
+
 settings = JSON.parse(sessionStorage.getItem("fields"));
 
 $(document).ready(function() {
@@ -12,24 +15,30 @@ $(document).ready(function() {
         success: function (data) {
             questions = data;
             displayQuestion(questions[questionNumber]);
+
+            if (questionNumber == questions.length - 1) {  // If one question was requested, then the next button will change accordingly.
+                $('#next').text('Show result');
+            }
         }
     });
 
     $('#next').click(function() {
-        if(checkAnswer() == true) {
-            alert("Correct!");
-        } else if (checkAnswer() == false) {
-            alert("Incorrect!");
-        } else {
-            alert("Please select an answer.");
-        }
 
+        storeAnswer();
 
         if (questionNumber < questions.length - 1) {  // Making the value -2 instead of -1 will execute the code inside the if statement on the last question.
             questionNumber++;
             displayQuestion(questions[questionNumber]);
+
+            if (questionNumber == questions.length - 1) {
+                $('#next').text('Show result');
+            }
+
         } else {
-            $('#next').hide();
+            // console.log(userAnswers);  // TODO: Remove later.
+            sessionStorage.setItem("userAnswers", JSON.stringify(userAnswers));
+            sessionStorage.setItem("questions", JSON.stringify(questions));
+            window.location.href = "./quizend.html";
         }
     });
 
@@ -86,6 +95,7 @@ function checkAnswer(){
 
 function displayQuestion(question) {
     resetChoices();
+    
 
     $('#q-title').text(question.title);
     $('#uuid').text(question.id);
@@ -105,6 +115,12 @@ function displayQuestion(question) {
     $.each(choices, function(index, value) {  // Displays the choices.
         $("#" + alphabet[index]).text(value);
     });
+
+    if(questionNumber < questions.length - 1) {
+        $('#next').text('Next');
+    }
+
+    showCurrentAnswers();
 }
 
 function resetChoices() {
@@ -117,3 +133,40 @@ function resetChoices() {
     }
 }
 
+function storeAnswer() {
+    let checkedAnswer = [];
+    $("[name='answer']").each(function() {
+        if ($(this).is(':checked')) {
+            checkedAnswer.push($("#" + $(this).val()).text());
+        }
+    });
+
+    questionTitle = questions[questionNumber].title;
+
+    $.each(userAnswers, function(index, value) {  // Checks if the question was already answered. And if it was then it will remove the old answer to be replaced with the new one later on.
+        if (value.question == questionTitle) {
+            userAnswers.splice(index, 1);
+        }
+    });
+
+    userAnswers.push({
+        "question": questionTitle,
+        "answer": checkedAnswer
+    });
+}
+
+function showCurrentAnswers() {
+    questionTitle = $("#q-title").text();
+
+    $.each(userAnswers, function(index, value) {
+        if (value.question.localeCompare(questionTitle) == 0) {
+            $.each(value.answer, function(index, value) {
+                $("[name='answer']").each(function() {
+                    if ($("#" + $(this).val()).text().localeCompare(value) == 0) {
+                        $(this).prop('checked', true);
+                    }
+                });
+            });
+        }
+    });
+}
