@@ -47,6 +47,7 @@ function submitQuestion() {
     }
 
     let data = {
+        set: $("#questionsSet").val(),
         title: $('#title').val(),
         tfradio: $('input[name="tfradio"]:checked').val(),
         choices: choices, 

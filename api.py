@@ -1,11 +1,7 @@
-from asyncio.windows_events import NULL
 import json
 import random
-from unittest import result
 
 from fastapi import FastAPI, Request
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.orm import Session
@@ -54,19 +50,52 @@ async def root(info: Request):
     # Now we will add th question to the database
     session = Session()
 
-    # Since explanation is optional, we need to check if it is in the request. There is probably a "less ugly" way to do this
+    id = str(uuid.uuid4())
+    title = req_info['title']
+    choices = json.dumps(req_info['choices'])
+    answer = json.dumps(req_info['answer'])
+
     try:
-        new_question = Question(id=str(uuid.uuid4()), title=req_info['title'], choices=json.dumps(req_info['choices']), answer=json.dumps(req_info['answer']), explanation=req_info['explanation'])
+        explanation = req_info['explanation']
     except KeyError:
-        new_question = Question(id=str(uuid.uuid4()), title=req_info['title'], choices=json.dumps(req_info['choices']), answer=json.dumps(req_info['answer']))
+        explanation = None
+    
+    new_question = Question(id=id, title=title, choices=choices, answer=answer, explanation=explanation)
 
     # In case you were wondering like me to how it knows what table to insert into, it's because we specified the table name in the Question class.
-    
     session.add(new_question)
     session.commit()
 
-    
+    try:
+        setCode = req_info['set']
+        metadata = MetaData()
+        setTable = Table('questions_sets', metadata, autoload=True, autoload_with=engine)
 
+        setRow = session.query(setTable).filter(setTable.c.set_code == setCode).first()
+
+
+        try:
+            questionsUUID = json.loads(setRow.questions_uuid)
+        except TypeError:
+            questionsUUID = []
+
+        questionsUUID.append(id)
+        questionsUUID = json.dumps(questionsUUID)
+
+
+        session.query(setTable).filter(setTable.c.set_code == setCode).update({setTable.c.questions_uuid: questionsUUID})
+        session.commit()
+
+    except AttributeError:
+        # This means that the set code is invalid
+        # TODO: Make a good error message
+        pass
+
+    except KeyError:
+        # This means that the set code was not provided
+        setCode = None
+
+    
     return {
         "status" : "Question Added",
         "data" : req_info

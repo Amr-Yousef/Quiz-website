@@ -59,6 +59,62 @@
         font-size: 1.5rem;
         max-width: 70vw;
 
+        .set-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .field {
+                margin: 1rem 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .title {
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    margin-bottom: 1rem;
+    
+                    em {
+                        font-size: 0.8rem;
+                        font-weight: 400;
+                    }
+                }
+    
+                .input-container {
+                    position: relative;
+    
+                    #questionsSet {
+                        width: max-content;
+                        
+                        border-radius: 0.4rem;
+                        height: 1.5rem;
+    
+                        background-color: $clr-input-bg;
+                        color: $clr-light;
+                        border: solid 2px $clr-dark;
+                        
+                        font-weight: 600;
+                        font-size: 1rem;
+                        padding-left: 2rem;
+                        letter-spacing: 0.5rem;
+                        text-transform: uppercase;
+    
+                        &:focus {
+                            outline: none;
+                            border: solid 2px $clr-medium;
+                        }
+                    }
+    
+                    .hashtag {
+                        background-size: 1rem;
+                        height: 2rem;
+                    }
+    
+                }
+            }
+        }
+
         p {
             color: $clr-light;
             text-decoration: underline;
