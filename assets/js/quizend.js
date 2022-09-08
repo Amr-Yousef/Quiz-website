@@ -1,12 +1,9 @@
 userAnswers = JSON.parse(sessionStorage.getItem("userAnswers"));
 questions = JSON.parse(sessionStorage.getItem("questions"));
 
-counter = 0;  // remove later
+counter = 0;  // find an alternative to this. Doesn't feel like the optimal solution.
 
 $(document).ready(function() {
-
-    console.log(userAnswers);
-    console.log(questions);
 
     $.each(questions, function(index, value) {
         let question = value.title;

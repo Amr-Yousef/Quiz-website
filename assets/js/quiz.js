@@ -35,7 +35,6 @@ $(document).ready(function() {
             }
 
         } else {
-            // console.log(userAnswers);  // TODO: Remove later.
             sessionStorage.setItem("userAnswers", JSON.stringify(userAnswers));
             sessionStorage.setItem("questions", JSON.stringify(questions));
             window.location.href = "./quizend.html";
