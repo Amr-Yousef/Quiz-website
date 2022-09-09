@@ -52,6 +52,7 @@ function submitQuestion() {
         tfradio: $('input[name="tfradio"]:checked').val(),
         choices: choices, 
         answer: getAnswer(),
+        explanation: $('#explanation').val()
     };
 
     $.ajax({

@@ -377,4 +377,15 @@
   font-size: 1rem;
   cursor: pointer;
   margin-bottom: 1rem;
+}
+.container .form .explanation .exp-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.container .form .explanation .exp-title .optional {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-left: 1rem;
+  text-decoration: none;
 }/*# sourceMappingURL=question-submit.css.map */

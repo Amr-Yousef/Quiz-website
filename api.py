@@ -64,7 +64,7 @@ async def root(info: Request):
 
     # In case you were wondering like me to how it knows what table to insert into, it's because we specified the table name in the Question class.
     session.add(new_question)
-    session.commit()
+    session.commit()  # I am not sure whether I need to write this every time or I can just put it at the very end. The latter sounds to be correct.
 
     try:
         setCode = req_info['set']

@@ -337,5 +337,20 @@
             }
         }
 
+        .explanation {
+            
+            .exp-title {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                .optional {
+                    font-size: 1rem;
+                    font-weight: 300;
+                    margin-left: 1rem;
+                    text-decoration: none;
+                }
+            }
+        }
     }
 }
