@@ -127,7 +127,7 @@ async def root(amount: int):
 
 # === Sets ===
 
-@app.get("/api/quiz/set")
+@app.get("/api/quiz/set/setinfo")
 async def root():
     metadata = MetaData()
     sets = Table('sets', metadata, autoload=True, autoload_with=engine)
@@ -136,7 +136,7 @@ async def root():
     result = session.query(sets).all()
     return result
 
-@app.get("/api/quiz/set/{setCode}")
+@app.get("/api/quiz/set/setinfo/{setCode}")
 async def root(setCode: str):
     metadata = MetaData()
     set = Table('sets', metadata, autoload=True, autoload_with=engine)
@@ -147,7 +147,18 @@ async def root(setCode: str):
     return result
 
 # Returns the questions in a set
-@app.get("/api/quiz/set/{setCode}/{numberOfQuestions}")
+@app.get("/api/quiz/set/questions/{setCode}")
+async def root(setCode: str):
+    metadata = MetaData()
+    questionsSet = Table('questions_sets', metadata, autoload=True, autoload_with=engine)
+    questions = Table('questions', metadata, autoload=True, autoload_with=engine)
+    session = Session()
+
+    query = session.query(questions).join(questionsSet, questions.c.id == questionsSet.c.question_id).filter(questionsSet.c.set_code == setCode).all()
+
+    return query
+
+@app.get("/api/quiz/set/questions/{setCode}/{numberOfQuestions}")
 async def root(setCode: str, numberOfQuestions: int):
     metadata = MetaData()
     questionsSet = Table('questions_sets', metadata, autoload=True, autoload_with=engine)
