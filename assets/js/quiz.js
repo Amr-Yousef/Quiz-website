@@ -10,7 +10,7 @@ settings = JSON.parse(sessionStorage.getItem("fields"));
 $(document).ready(function() {
     let seturl = settings.set + '/' + settings.numberOfQuestions;
     $.ajax({
-        url: 'http://127.0.0.1:8000/api/quiz/set/' +  seturl,
+        url: 'http://127.0.0.1:8000/api/quiz/set/questions/' +  seturl,
         type: 'GET',
         success: function (data) {
             questions = data;
