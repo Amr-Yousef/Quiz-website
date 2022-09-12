@@ -108,6 +108,26 @@
   font-family: "Work Sans", sans-serif;
 }
 
+.nav-container .navbar {
+  width: 90%;
+}
+.nav-container .navbar .goback {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+.nav-container .navbar .goback img {
+  width: 2rem;
+  transition: cubic-bezier(0, 0, 0.25, 1) 0.3s;
+}
+.nav-container .navbar .goback a {
+  margin-left: 1rem;
+}
+.nav-container .navbar .goback a:hover ~ img {
+  transform: translateX(-1rem);
+  transition: cubic-bezier(0, 0, 0.25, 1) 0.3s;
+}
+
 .title {
   color: #e7f6f2;
   text-align: center;

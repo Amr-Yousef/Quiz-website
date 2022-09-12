@@ -5,6 +5,34 @@
     font-family: 'Work Sans', sans-serif;
 }
 
+.nav-container {
+
+    .navbar {
+        width: 90%; // override the default width of the navbar
+
+        .goback {
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+
+            img {
+                width: 2rem;
+                @include ease-in-transition();
+            }
+
+            a {
+                margin-left: 1rem;
+
+                &:hover ~ img {
+                    transform: translateX(-1rem);
+
+                    @include ease-in-transition();
+                }
+            }
+        }
+    }
+}
+
 .title {
     color: $clr-light;
     text-align: center;
