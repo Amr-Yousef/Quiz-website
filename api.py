@@ -9,7 +9,7 @@ from sqlalchemy.orm import sessionmaker
 
 import uuid
 
-from assets.python.quizwebsite import Question
+from assets.python.quizwebsite import Question, QuestionSet
 
 
 app = FastAPI()
@@ -22,6 +22,9 @@ Session = sessionmaker(engine)
 @app.get("/")
 def root():
     return {"message": "This is the root"}
+
+
+# === Questions ===
 
 @app.get("/api/question")
 async def root():
@@ -42,7 +45,7 @@ async def root(id: str):
     result = session.query(questions).filter(questions.c.id == id).first()
     return result
 
-
+# TODO: You were here, trying to fit the new post method with the new system
 @app.post("/api/question")
 async def root(info: Request):
     req_info = await info.json()
@@ -68,32 +71,25 @@ async def root(info: Request):
 
     try:
         setCode = req_info['set']
+
         metadata = MetaData()
-        setTable = Table('questions_sets', metadata, autoload=True, autoload_with=engine)
 
-        setRow = session.query(setTable).filter(setTable.c.set_code == setCode).first()
+        questionSetTable = Table('questions_sets', metadata, autoload=True, autoload_with=engine)
+        setTable = Table('sets', metadata, autoload=True, autoload_with=engine)
 
+        setRow = session.query(setTable).filter(setTable.c.code == setCode).first()
 
-        try:
-            questionsUUID = json.loads(setRow.questions_uuid)
-        except TypeError:
-            questionsUUID = []
+        if setRow is None:
+            return {"message": "The set code does not exist."}
+        
+        questionSet = QuestionSet(set_code=setCode, question_id=id)
+        session.add(questionSet)
 
-        questionsUUID.append(id)
-        questionsUUID = json.dumps(questionsUUID)
-
-
-        session.query(setTable).filter(setTable.c.set_code == setCode).update({setTable.c.questions_uuid: questionsUUID})
         session.commit()
-
-    except AttributeError:
-        # This means that the set code is invalid
-        # TODO: Make a good error message
-        pass
 
     except KeyError:
         # This means that the set code was not provided
-        setCode = None
+        return {"message": "The set code was not provided."}
 
     
     return {
@@ -128,16 +124,29 @@ async def root(amount: int):
         
     return result
 
+
+# === Sets ===
+
+@app.get("/api/quiz/set")
+async def root():
+    metadata = MetaData()
+    sets = Table('sets', metadata, autoload=True, autoload_with=engine)
+    session = Session()
+
+    result = session.query(sets).all()
+    return result
+
 @app.get("/api/quiz/set/{setCode}")
 async def root(setCode: str):
     metadata = MetaData()
-    questionsSet = Table('questions_sets', metadata, autoload=True, autoload_with=engine)
+    set = Table('sets', metadata, autoload=True, autoload_with=engine)
     session = Session()
 
-    result = session.query(questionsSet).filter(questionsSet.c.set_code == setCode).first()
+    result = session.query(set).filter(set.c.code == setCode).first()
 
     return result
 
+# Returns the questions in a set
 @app.get("/api/quiz/set/{setCode}/{numberOfQuestions}")
 async def root(setCode: str, numberOfQuestions: int):
     metadata = MetaData()
@@ -145,13 +154,9 @@ async def root(setCode: str, numberOfQuestions: int):
     questions = Table('questions', metadata, autoload=True, autoload_with=engine)
     session = Session()
 
-    setObj = session.query(questionsSet).filter(questionsSet.c.set_code == setCode).first()
-    setQuestions = json.loads(setObj.questions_uuid)
-    
-    UUIDArray = random.sample(setQuestions, numberOfQuestions)
+    query = session.query(questions).join(questionsSet, questions.c.id == questionsSet.c.question_id).filter(questionsSet.c.set_code == setCode).all()
 
-    result = []
-    for questionUUID in UUIDArray:
-        result.append(session.query(questions).filter(questions.c.id == questionUUID).first())
+    #samples random questions from the set
+    rand = random.sample(query, numberOfQuestions)
 
-    return result
+    return rand
