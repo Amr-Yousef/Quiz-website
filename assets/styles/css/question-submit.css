@@ -175,6 +175,15 @@
   font-size: 1.5rem;
   max-width: 70vw;
 }
+.container .form .header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.container .form .set-header {
+  display: flex;
+  flex-direction: column-reverse;
+}
 .container .form .set-container {
   display: flex;
   flex-direction: column;
@@ -190,6 +199,7 @@
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
+  margin-top: 0.5rem;
 }
 .container .form .set-container .field .title em {
   font-size: 0.8rem;
@@ -408,4 +418,11 @@
   font-weight: 300;
   margin-left: 1rem;
   text-decoration: none;
+}
+
+.error-message {
+  color: rgb(255, 65, 65);
+  font-size: 1rem;
+  font-weight: 300;
+  margin-left: 1rem;
 }/*# sourceMappingURL=question-submit.css.map */

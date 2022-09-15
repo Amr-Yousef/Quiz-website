@@ -26,7 +26,9 @@
     <form id="question-form" class="form">
         <div class="set-container">
             <div class="field">
-                <p class="title">Questions' set #</p>
+                <div class="set-header">
+                    <p class="title" id="setTitle">Questions' set #</p>
+                </div>
                 <div class="input-container">
                     <i class="hashtag"></i>
                     <input type="text" id="questionsSet" maxlength="10" placeholder="5AC73D">
@@ -34,7 +36,9 @@
             </div>
         </div>
         <div class="question">
-            <p>What is your question?</p>
+            <div class="header">
+                <p id="questionTitle">What is your question?</p>
+            </div>
             <textarea placeholder="Type your question here..." id="title"></textarea>
         </div>
         <div class="trueorfalse">
@@ -53,7 +57,9 @@
             </div>
         </div>
         <div class="answers">
-            <p>What are the choices?</p>
+            <div class="header">
+                <p id="choicesTitle">What are the choices?</p>
+            </div>
             <div class="option">
                 <div class="option-fields">
                     <div class="option-container">

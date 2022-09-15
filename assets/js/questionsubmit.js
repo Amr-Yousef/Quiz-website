@@ -30,7 +30,28 @@ function getAnswer() {
     return answers;
 }
 
+function getChoices() {
+    let choices = [];
+    choices = [
+        $("#a").val().trim(),
+        $("#b").val().trim(),
+        $("#c").val().trim(),
+        $("#d").val().trim()
+    ]
+
+    var filtered = choices.filter(function(e){
+        return e != ""
+    });
+
+    return filtered;
+}
+
 function submitQuestion() {
+
+    // TODO: Add validation to this form.
+    if(validateForm()) {
+        return false;
+    }
 
     let choices = [];
     let trueOrFalse = $('input[type=radio][name=tfradio]:checked').val();
@@ -38,12 +59,7 @@ function submitQuestion() {
     if(trueOrFalse == 'yes') {  // There is probably a better way to do this. Perhaps some loop that will generalize this part more, allowing for flexible number of choices.
         choices = [$("#a").val(), $("#b").val()];
     } else {
-        choices = [
-            $("#a").val(),
-            $("#b").val(),
-            $("#c").val(),
-            $("#d").val()
-        ]
+        choices = getChoices();
     }
 
     let data = {
@@ -79,5 +95,59 @@ function resetForm() {
 
     $("#c").parent().show();
     $("#d").parent().show();
+}
+
+// Just a really basic validation.
+function validateForm() {
+    let setTitle = $("#setTitle");
+    let title = $('#questionTitle');
+    let tfradio = $('input[name="tfradio"]:checked').val()
+    let choices = $('#choicesTitle');
+    let choicesArr = getChoices();
+    let answer = getAnswer();
+
+    flag = false;
+
+    $(".error-message").remove() // Remove all error messages before validating so that it resets correctly.
+
+    if(!validateField($("#questionsSet"))) {
+        errorMsg(setTitle, "Please enter a set.");
+        flag = true;
+    }
+
+    if(!validateField($("#title"))) {
+        errorMsg(title, "Please enter a title.");
+        flag = true;
+    }
+
+    if(tfradio == "no" && choicesArr.length != 4) {
+        errorMsg(choices, "Please fill in all the choices.");
+        flag = true;
+    } else if(answer.length == 0) {
+        errorMsg(choices, "Please choose an answer.");
+        flag = true;
+    }
+
+    return flag;
+}
+
+function validateField(field) {
+    if(!(Array.isArray(field))) {
+        field = field.val().trim();
+    }
+
+    if(field == null || field == "") {
+        return false;
+    }
+    return true;
+}
+
+function errorMsg(element, msg) {
+    if(msg == "remove") {
+        element.next().remove();
+        return true;
+    }
+    errMsg = `<span class="error-message">* ${msg}</span>`;
+    element.after(errMsg);
 }
 
