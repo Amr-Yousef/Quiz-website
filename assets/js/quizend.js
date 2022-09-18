@@ -1,5 +1,6 @@
 userAnswers = JSON.parse(sessionStorage.getItem("userAnswers"));
 questions = JSON.parse(sessionStorage.getItem("questions"));
+settings = JSON.parse(sessionStorage.getItem("fields"));
 
 counter = 0;  // find an alternative to this. Doesn't feel like the optimal solution.
 
@@ -80,8 +81,52 @@ $(document).ready(function() {
 
 
     });
+
+    $("#share").click(function() {
+        popUp("Share quiz link!", copyLink());
+        
+        $("#buttonAction").click(function() {
+            $("#shareLink").select();
+            document.execCommand("copy");
+
+            $(this).text("Copied!");
+        });
+    });
+
 });
 
 function compareArr( arr1, arr2 ) {  // Again, totally did not copy this from stack overflow. https://stackoverflow.com/questions/29648234/is-there-a-way-to-check-if-two-arrays-have-the-same-elements
     return  $( arr1 ).not( arr2 ).length === 0 && $( arr2 ).not( arr1 ).length === 0;  
+}
+
+function popUp(title, value) {
+    // A more generic popup function would be nice, but this works for now.
+    popUpHTML = `
+    <div class="pop-up-container">
+        <div class="pop-up">
+            <div class="exit-svg">
+                <img src="../assets/svg/cross.svg" alt="Close" id="popUpExit">
+            </div>
+            <div class="title">${title}</div>
+            <div class="pop-up-content">
+                <div class="input-container">
+                    <input class="default-input" type="text" id="shareLink" readonly="readonly" value="${value}">
+                </div>
+                <div class="default-button" id="buttonAction">Copy</div>
+            </div>
+        </div>
+    </div>
+    `
+
+    $("body").prepend(popUpHTML);
+
+    $("#popUpExit").click(function() {
+        $(".pop-up-container").remove();
+    });
+}
+
+function copyLink() {
+    let link = "http://localhost/quiz/html/roquiz.html"
+    let parameters = `?setCode=${settings.set}&questionsNo=${settings.numberOfQuestions}&difficulty=${settings.difficulty}`;
+    return link + parameters;
 }

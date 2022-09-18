@@ -4,6 +4,7 @@
 $clr-light: #e7f6f2;
 $clr-medium: #a5c9ca;
 $clr-input-bg: rgb(58, 92, 101, 30%);
+$clr-input-bg-opaque: #304042;
 $clr-table-bg: #394343;
 $clr-dark: #3a5c65;
 $clr-bg: #2d3434;
@@ -106,5 +107,22 @@ $clr-bg: #2d3434;
         cursor: pointer;
 
         @include default-transition();
+    }
+}
+
+.default-input {
+    border-radius: 0.4rem;
+    height: 1.5rem;
+
+    background-color: $clr-input-bg;
+    color: $clr-light;
+    border: solid 2px $clr-dark;
+    
+    font-weight: 400;
+    font-size: 1rem;
+
+    &:focus {
+        outline: none;
+        border: solid 2px $clr-medium;
     }
 }

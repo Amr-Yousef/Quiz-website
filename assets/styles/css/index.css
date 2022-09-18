@@ -103,6 +103,20 @@
   transition: ease-in 0.3s;
 }
 
+.default-input {
+  border-radius: 0.4rem;
+  height: 1.5rem;
+  background-color: rgba(58, 92, 101, 0.3);
+  color: #e7f6f2;
+  border: solid 2px #3a5c65;
+  font-weight: 400;
+  font-size: 1rem;
+}
+.default-input:focus {
+  outline: none;
+  border: solid 2px #a5c9ca;
+}
+
 * {
   background-color: #2d3434;
   font-family: "Work Sans", sans-serif;
