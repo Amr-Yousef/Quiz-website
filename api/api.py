@@ -1,5 +1,8 @@
 import json
 import random
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
 
 from fastapi import FastAPI, Request
 
@@ -9,14 +12,16 @@ from sqlalchemy.orm import sessionmaker
 
 import uuid
 
-from assets.python.quizwebsite import Question, QuestionSet
+from classes.quizwebsite import Question, QuestionSet
 
+
+# In case you forgot where you were, your next step is to somehow host this api. Good luck, you'll need it.
+dotenv_path = join(dirname(__file__), 'superdupersecret.env')
+load_dotenv(dotenv_path)
 
 app = FastAPI()
 
-# Dialect+driver://username:password@host:port/database
-# As a reminder, a URL that includes the password "kx@jj5/g", where the “at” sign and slash characters are represented as %40 and %2F
-engine = create_engine('mysql+pymysql://root:@localhost/quiz')
+engine = create_engine(os.getenv("CONNECTION_STRING"))
 Session = sessionmaker(engine)
 
 @app.get("/")
