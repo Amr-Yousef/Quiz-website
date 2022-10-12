@@ -12,7 +12,7 @@ from sqlalchemy.orm import sessionmaker
 
 import uuid
 
-from api.classes.quizwebsite import Question, QuestionSet
+from classes.quizwebsite import Question, QuestionSet
 
 
 # In case you forgot where you were, your next step is to somehow host this api. Good luck, you'll need it.
