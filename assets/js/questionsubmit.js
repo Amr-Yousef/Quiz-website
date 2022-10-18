@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-    $('input[type=radio][name=tfradio]').change(function() {  // This looks ugly, and when things look ugly then there is probably a better way to do it.
+    $('input[type=radio][name=tfradio]').change(function () {  // This looks ugly, and when things look ugly then there is probably a better way to do it.
         if (this.value == 'yes') {
             $("#a").val("True");
             $("#a").attr('disabled', true);
@@ -21,15 +21,24 @@ $(document).ready(function () {
         }
     });
 
-    $("#title").on('input', function() {
+    $("#title").on('input', function () {
         updatePreview();
+    });
+
+    // Prevents the user from pressing enter to submit the form.
+    // TODO: When pressing enter it should go to the next field.
+    $(window).keydown(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
     });
 });
 
 
 // Completely my own idea and didn't even think of copying a code from Stackoverflow from 2011. https://stackoverflow.com/questions/6140632/how-to-handle-tab-in-textarea
-$("#title").keydown(function(e) {
-    if(e.keyCode === 9) { // tab was pressed
+$("#title").keydown(function (e) {
+    if (e.keyCode === 9) { // tab was pressed
         // get caret position/selection
         var start = this.selectionStart;
         var end = this.selectionEnd;
@@ -39,8 +48,8 @@ $("#title").keydown(function(e) {
 
         // set textarea value to: text before caret + tab + text after caret
         $this.val(value.substring(0, start)
-                    + "\t"
-                    + value.substring(end));
+            + "\t"
+            + value.substring(end));
 
         // put caret at right position again (add one for the tab)
         this.selectionStart = this.selectionEnd = start + 1;
@@ -49,7 +58,6 @@ $("#title").keydown(function(e) {
         e.preventDefault();
     }
 });
-
 
 function getAnswer() {
     answers = [];
@@ -68,7 +76,7 @@ function getChoices() {
         $("#d").val().trim()
     ]
 
-    var filtered = choices.filter(function(e){
+    var filtered = choices.filter(function (e) {
         return e != ""
     });
 
@@ -78,14 +86,14 @@ function getChoices() {
 function submitQuestion() {
 
     // TODO: Add validation to this form.
-    if(validateForm()) {
+    if (validateForm()) {
         return false;
     }
 
     let choices = [];
     let trueOrFalse = $('input[type=radio][name=tfradio]:checked').val();
 
-    if(trueOrFalse == 'yes') {  // There is probably a better way to do this. Perhaps some loop that will generalize this part more, allowing for flexible number of choices.
+    if (trueOrFalse == 'yes') {  // There is probably a better way to do this. Perhaps some loop that will generalize this part more, allowing for flexible number of choices.
         choices = [$("#a").val(), $("#b").val()];
     } else {
         choices = getChoices();
@@ -95,7 +103,7 @@ function submitQuestion() {
         set: $("#questionsSet").val(),
         title: $('#title').val(),
         tfradio: $('input[name="tfradio"]:checked').val(),
-        choices: choices, 
+        choices: choices,
         answer: getAnswer(),
         explanation: $('#explanation').val()
     };
@@ -105,7 +113,7 @@ function submitQuestion() {
         type: 'POST',
         data: JSON.stringify(data),
         success: function (response) {
-            
+
             resetForm();
             alert("Question has been submitted successfully!");
         }
@@ -139,20 +147,20 @@ function validateForm() {
 
     $(".error-message").remove() // Remove all error messages before validating so that it resets correctly.
 
-    if(!validateField($("#questionsSet"))) {
+    if (!validateField($("#questionsSet"))) {
         errorMsg(setTitle, "Please enter a set.");
         flag = true;
     }
 
-    if(!validateField($("#title"))) {
+    if (!validateField($("#title"))) {
         errorMsg(title, "Please enter a title.");
         flag = true;
     }
 
-    if(tfradio == "no" && choicesArr.length != 4) {
+    if (tfradio == "no" && choicesArr.length != 4) {
         errorMsg(choices, "Please fill in all the choices.");
         flag = true;
-    } else if(answer.length == 0) {
+    } else if (answer.length == 0) {
         errorMsg(choices, "Please choose an answer.");
         flag = true;
     }
@@ -161,18 +169,18 @@ function validateForm() {
 }
 
 function validateField(field) {
-    if(!(Array.isArray(field))) {
+    if (!(Array.isArray(field))) {
         field = field.val().trim();
     }
 
-    if(field == null || field == "") {
+    if (field == null || field == "") {
         return false;
     }
     return true;
 }
 
 function errorMsg(element, msg) {
-    if(msg == "remove") {
+    if (msg == "remove") {
         element.next().remove();
         return true;
     }
@@ -185,8 +193,8 @@ function updatePreview() {
     let input = $('#title').val();
 
     regexSelection = regex.exec(input);
-    
-    if(regexSelection != null) {
+
+    if (regexSelection != null) {
         let match = regexSelection[1];
         var codeStartIndex = regexSelection.index;
         var codeLength = regexSelection[0].length;
@@ -199,7 +207,7 @@ function updatePreview() {
     }
 
 
-    if(finalCode != null) {
+    if (finalCode != null) {
         before = `<pre>${input.substring(0, codeStartIndex)}</pre>`;
         after = `<pre>${input.substring(codeStartIndex + codeLength)}</pre>`;
         final = before + finalCode + after;
@@ -211,5 +219,5 @@ function updatePreview() {
     else {
         $("#previewText").html(input);
     }
-    
+
 }
