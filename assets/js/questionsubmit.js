@@ -27,7 +27,7 @@ $(document).ready(function () {
 
     // Prevents the user from pressing enter to submit the form.
     // TODO: When pressing enter it should go to the next field.
-    $(window).keydown(function (event) {
+    $(":text").keydown(function (event) {
         if (event.keyCode == 13) {
             event.preventDefault();
             return false;
