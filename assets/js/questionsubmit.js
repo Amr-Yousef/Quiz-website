@@ -122,6 +122,7 @@ function submitQuestion() {
 }
 
 function resetForm() {
+    
     $('#question-form').trigger("reset");
 
     // In case true or false is selected, this will make sure the form is reset correctly.
@@ -132,6 +133,8 @@ function resetForm() {
 
     $("#c").parent().show();
     $("#d").parent().show();
+
+    $("#previewText").empty();
 }
 
 // Just a really basic validation.
