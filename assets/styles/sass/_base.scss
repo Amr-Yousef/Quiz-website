@@ -10,7 +10,6 @@ $clr-dark: #3a5c65;
 $clr-bg: #2d3434;
 
 @mixin icon($icon) {
-    padding-left: 1rem;
     background: url($icon) no-repeat left;
     background-size: 1.5rem;
     position: absolute;
