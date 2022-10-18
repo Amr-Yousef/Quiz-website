@@ -123,7 +123,9 @@ function submitQuestion() {
 
 function resetForm() {
     
+    let setCode = $("#questionsSet").val();
     $('#question-form').trigger("reset");
+    $("#questionsSet").val(setCode);  // Saves the set code so that the user doesn't have to re-enter it.
 
     // In case true or false is selected, this will make sure the form is reset correctly.
     $("#a").val('');
