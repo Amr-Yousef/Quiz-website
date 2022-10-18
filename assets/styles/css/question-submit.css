@@ -120,6 +120,7 @@
 * {
   background-color: #2d3434;
   font-family: "Work Sans", sans-serif;
+  color: #e7f6f2;
 }
 
 .nav-container .navbar {
@@ -187,7 +188,7 @@
   flex-direction: column;
   justify-content: center;
   font-size: 1.5rem;
-  max-width: 70vw;
+  width: 55vw;
 }
 .container .form .header {
   display: flex;
@@ -265,6 +266,13 @@
 }
 .container .form textarea:focus {
   outline: none;
+}
+.container .form .question-preview {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+.container .form .question-preview .preview-text .code-block {
+  border-radius: 1rem;
 }
 .container .form .trueorfalse {
   display: flex;

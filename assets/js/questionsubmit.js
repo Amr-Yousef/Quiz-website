@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     $('input[type=radio][name=tfradio]').change(function() {  // This looks ugly, and when things look ugly then there is probably a better way to do it.
         if (this.value == 'yes') {
@@ -19,6 +20,34 @@ $(document).ready(function () {
             $("#d").parent().show();
         }
     });
+
+    $("#title").on('input', function() {
+        updatePreview();
+    });
+});
+
+
+// Completely my own idea and didn't even think of copying a code from Stackoverflow from 2011. https://stackoverflow.com/questions/6140632/how-to-handle-tab-in-textarea
+$("#title").keydown(function(e) {
+    if(e.keyCode === 9) { // tab was pressed
+        // get caret position/selection
+        var start = this.selectionStart;
+        var end = this.selectionEnd;
+
+        var $this = $(this);
+        var value = $this.val();
+
+        // set textarea value to: text before caret + tab + text after caret
+        $this.val(value.substring(0, start)
+                    + "\t"
+                    + value.substring(end));
+
+        // put caret at right position again (add one for the tab)
+        this.selectionStart = this.selectionEnd = start + 1;
+
+        // prevent the focus lose
+        e.preventDefault();
+    }
 });
 
 
@@ -151,3 +180,36 @@ function errorMsg(element, msg) {
     element.after(errMsg);
 }
 
+function updatePreview() {
+    let regex = /```([^]*)```/gm;
+    let input = $('#title').val();
+
+    regexSelection = regex.exec(input);
+    
+    if(regexSelection != null) {
+        let match = regexSelection[1];
+        var codeStartIndex = regexSelection.index;
+        var codeLength = regexSelection[0].length;
+
+
+        var language = match.split("\n")[0];
+        let code = match.split("\n").slice(1).join("\n");
+
+        var finalCode = `<pre><code class="language-${language}">${code}</code></pre>`;
+    }
+
+
+    if(finalCode != null) {
+        before = `<pre>${input.substring(0, codeStartIndex)}</pre>`;
+        after = `<pre>${input.substring(codeStartIndex + codeLength)}</pre>`;
+        final = before + finalCode + after;
+
+        $('#previewText').html(final);
+        Prism.highlightElement($(`.language-${language}`)[0]);
+        $(`.language-${language}`).addClass("code-block");
+    }
+    else {
+        $("#previewText").html(input);
+    }
+    
+}

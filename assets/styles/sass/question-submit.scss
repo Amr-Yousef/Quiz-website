@@ -3,6 +3,7 @@
 * {
     background-color: $clr-bg;
     font-family: 'Work Sans', sans-serif;
+    color: $clr-light;
 }
 
 .nav-container {
@@ -85,7 +86,7 @@
         flex-direction: column;
         justify-content: center;
         font-size: 1.5rem;
-        max-width: 70vw;
+        width: 55vw;
 
         .header {
             display: flex;
@@ -179,6 +180,18 @@
 
             &:focus {
                 outline: none;
+            }
+        }
+
+        .question-preview {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+
+            .preview-text {
+
+                .code-block {
+                    border-radius: 1rem;
+                }
             }
         }
 

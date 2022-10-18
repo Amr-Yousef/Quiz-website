@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../assets/styles/css/question-submit.css">
+    <link rel="stylesheet" type="text/css" href="../assets/styles/css/prism.css">
 </head>
 <body>
 <div class="nav-container">
@@ -40,6 +41,16 @@
                 <p id="questionTitle">What is your question?</p>
             </div>
             <textarea placeholder="Type your question here..." id="title"></textarea>
+        </div>
+        <div class="question-preview">
+            <div class="header">
+                <p id="questionPreviewTitle">Preview:</p>
+            </div>
+            <div class="preview">
+                    <div class="preview-text" id="previewText">
+                        
+                    </div>
+            </div>
         </div>
         <div class="trueorfalse">
             <p>Is this a true or false question?</p>
@@ -114,5 +125,6 @@
 </div>
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 <script src="../assets/js/questionsubmit.js"></script>
+<script src="../assets/js/prism.js"></script>
 </body>
 </html>
