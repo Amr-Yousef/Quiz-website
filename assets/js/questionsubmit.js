@@ -109,7 +109,7 @@ function submitQuestion() {
     };
 
     $.ajax({
-        url: 'http://127.0.0.1:8000/api/question',
+        url: 'https://stingray-app-5uwa8.ondigitalocean.app/api/question',
         type: 'POST',
         data: JSON.stringify(data),
         success: function (response) {
