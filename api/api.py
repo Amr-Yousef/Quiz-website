@@ -22,7 +22,7 @@ load_dotenv(dotenv_path)
 
 app = FastAPI()
 
-origins = ["https://king-prawn-app-7qgdu.ondigitalocean.app/"]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
