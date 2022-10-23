@@ -5,6 +5,7 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.orm import Session
@@ -20,6 +21,17 @@ dotenv_path = join(dirname(__file__), 'superdupersecret.env')
 load_dotenv(dotenv_path)
 
 app = FastAPI()
+
+origins = ["https://king-prawn-app-7qgdu.ondigitalocean.app/"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 engine = create_engine(os.getenv("CONNECTION_STRING"))
 Session = sessionmaker(engine)
