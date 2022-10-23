@@ -112,6 +112,11 @@
   border: solid 2px #a5c9ca;
 }
 
+.code-block {
+  border-radius: 1rem;
+  font-size: medium !important;
+}
+
 body {
   background-color: #2d3434;
   font-family: "Work Sans", sans-serif;

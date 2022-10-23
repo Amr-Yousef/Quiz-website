@@ -125,3 +125,9 @@ $clr-bg: #2d3434;
         border: solid 2px $clr-medium;
     }
 }
+
+.code-block {
+    border-radius: 1rem;
+
+    font-size: medium !important;
+}

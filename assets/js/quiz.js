@@ -95,8 +95,39 @@ function checkAnswer(){
 function displayQuestion(question) {
     resetChoices();
     
+    let questionText = question.title;
+    $('#q-title').text();
+    let regex = /```([^]*)```/gm;
 
-    $('#q-title').text(question.title);
+    regexSelection = regex.exec(questionText);
+
+    if (regexSelection != null) {
+        let match = regexSelection[1];
+        var codeStartIndex = regexSelection.index;
+        var codeLength = regexSelection[0].length;
+
+
+        var language = match.split("\n")[0];
+        let code = match.split("\n").slice(1).join("\n");
+
+        var finalCode = `<pre><code class="language-${language}">${code}</code></pre>`;
+    }
+
+
+    if (finalCode != null) {
+        before = `<pre>${questionText.substring(0, codeStartIndex)}</pre>`;
+        after = `<pre>${questionText.substring(codeStartIndex + codeLength)}</pre>`;
+        final = before + finalCode + after;
+
+        $('#q-title').html(final);
+        Prism.highlightElement($(`.language-${language}`)[0]);
+        $(`.language-${language}`).addClass("code-block");
+    }
+    else {
+        $('#q-title').text(questionText);
+    }
+
+    
     $('#uuid').text(question.id);
     $('#questionNo').text(questionNumber + 1);
     $('#totalQuestions').text(questions.length);
@@ -169,3 +200,4 @@ function showCurrentAnswers() {
         }
     });
 }
+
