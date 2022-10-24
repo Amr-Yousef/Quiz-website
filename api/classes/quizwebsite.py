@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, JSON, TIMESTAMP
+from sqlalchemy import Column, Integer, String, JSON, TIMESTAMP, func
 from sqlalchemy.ext.declarative import declarative_base
 
 class Question(declarative_base()):
@@ -8,7 +8,7 @@ class Question(declarative_base()):
     choices = Column(String)
     answer = Column(String)
     explanation = Column(String)
-    time = Column(TIMESTAMP)
+    time = Column(TIMESTAMP, default=func.current_timestamp())
 
 class Set(declarative_base()):
     __tablename__ = 'sets'
