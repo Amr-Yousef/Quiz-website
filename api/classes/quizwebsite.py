@@ -8,6 +8,7 @@ class Question(declarative_base()):
     choices = Column(String)
     answer = Column(String)
     explanation = Column(String)
+    time = Column(TIMESTAMP)
 
 class Set(declarative_base()):
     __tablename__ = 'sets'
