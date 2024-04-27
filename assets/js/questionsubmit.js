@@ -1,4 +1,4 @@
-
+endpoint = 'http://127.0.0.1:8000'
 $(document).ready(function () {
     $('input[type=radio][name=tfradio]').change(function () {  // This looks ugly, and when things look ugly then there is probably a better way to do it.
         if (this.value == 'yes') {
@@ -109,7 +109,7 @@ function submitQuestion() {
     };
 
     $.ajax({
-        url: 'https://stingray-app-5uwa8.ondigitalocean.app/api/question',
+        url: endpoint + '/api/question',
         type: 'POST',
         data: JSON.stringify(data),
         success: function (response) {

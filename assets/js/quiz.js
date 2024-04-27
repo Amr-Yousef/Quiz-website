@@ -7,10 +7,12 @@ alphabet = ['a', 'b', 'c', 'd'];
 
 settings = JSON.parse(sessionStorage.getItem("fields"));
 
+endpoint = 'http://127.0.0.1:8000'
+
 $(document).ready(function() {
     let seturl = settings.set + '/' + settings.numberOfQuestions;
     $.ajax({
-        url: 'https://stingray-app-5uwa8.ondigitalocean.app/api/quiz/set/questions/' +  seturl,
+        url: endpoint + '/api/quiz/set/questions/' +  seturl,
         type: 'GET',
         success: function (data) {
             questions = data;
