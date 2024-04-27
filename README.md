@@ -3,6 +3,18 @@
 
 This is a FastAPI application for a Quiz Website. It provides various endpoints to interact with the quiz data.
 
+### Developmental screenshots
+- Users can submit questions and view them on the website:
+![Question submission form](./design/screenshots/question_submit.png)
+
+
+- In-quiz view:
+![In quiz](./design/screenshots/in_quiz.png)
+
+
+- End screen/score view:
+![End page](./design/screenshots/end_page.png)
+
 ## Frontend
 
 - Frontend for API:
