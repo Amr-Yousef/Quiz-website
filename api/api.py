@@ -100,12 +100,7 @@ async def root(info: Request):
     try:
         setCode = req_info['set']
 
-        metadata = MetaData()
-
-        questionSetTable = Table('questions_sets', metadata, autoload=True, autoload_with=engine)
-        setTable = Table('sets', metadata, autoload=True, autoload_with=engine)
-
-        setRow = session.query(setTable).filter(setTable.c.code == setCode).first()
+        setRow = session.query(Set).filter(Set.code == setCode).first()
 
         if setRow is None:
             return {"message": "The set code does not exist."}
