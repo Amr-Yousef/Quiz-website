@@ -10,10 +10,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.exc import OperationalError
+from sqlalchemy import inspect
+
 
 import uuid
 
-from classes.quizwebsite import Question, QuestionSet
+from classes.quizwebsite import Question, QuestionSet, Set
 
 
 # In case you forgot where you were, your next step is to somehow host this api. Good luck, you'll need it.
@@ -32,34 +35,42 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+try:
+    engine = create_engine(os.getenv("CONNECTION_STRING"))
+    # Try to connect to the database
+    Session = sessionmaker(engine)
+    print("Database connection successful.")
 
-engine = create_engine(os.getenv("CONNECTION_STRING"))
-Session = sessionmaker(engine)
+except OperationalError:
+    print("Failed to connect to the database.")
+    exit()
+
 
 @app.get("/")
 def root():
-    return {"message": "This is the rootttt"}
+    inspector = inspect(engine)
 
+    # Get database name
+    db_name = inspector.default_schema_name
+
+    # Get table information
+    tables = inspector.get_table_names()
+
+    return {"message": "This is the rootttt", "database": db_name, "tables": tables}
 
 # === Questions ===
 
 @app.get("/api/question")
 async def root():
-    metadata = MetaData()
-    questions = Table('questions', metadata, autoload=True, autoload_with=engine)
     session = Session()
-
-    result = session.query(questions).all()
+    result = session.query(Question).all()
     return result
 
 
 @app.get("/api/question/{id}")
 async def root(id: str):
-    metadata = MetaData()
-    questions = Table('questions', metadata, autoload=True, autoload_with=engine)
     session = Session()
-
-    result = session.query(questions).filter(questions.c.id == id).first()
+    result = session.query(Question).filter(Question.id == id).first()
     return result
 
 # TODO: You were here, trying to fit the new post method with the new system
@@ -117,27 +128,23 @@ async def root(info: Request):
 
 @app.get("/api/quiz/random")
 async def root():
-    metadata = MetaData()
-    questions = Table('questions', metadata, autoload=True, autoload_with=engine)
     session = Session()
 
-    rand = random.randrange(0, session.query(questions).count())
-    result = session.query(questions)[rand]
+    rand = random.randrange(0, session.query(Question).count())
+    result = session.query(Question)[rand]
     return result
 
 
 @app.get("/api/quiz/random/{amount}")
 async def root(amount: int):
-    metadata = MetaData()
-    questions = Table('questions', metadata, autoload=True, autoload_with=engine)
     session = Session()
 
     # TODO: Add a check to make sure the amount is less than the number of questions in the database, if not return an error message.
-    rand = random.sample(range(0, session.query(questions).count()), amount)
+    rand = random.sample(range(0, session.query(Question).count()), amount)
 
     result = []
     for num in rand:
-        result.append(session.query(questions)[num])
+        result.append(session.query(Question)[num])
         
     return result
 
@@ -146,43 +153,33 @@ async def root(amount: int):
 
 @app.get("/api/quiz/set/setinfo")
 async def root():
-    metadata = MetaData()
-    sets = Table('sets', metadata, autoload=True, autoload_with=engine)
     session = Session()
 
-    result = session.query(sets).all()
+    result = session.query(Set).all()
     return result
 
 @app.get("/api/quiz/set/setinfo/{setCode}")
 async def root(setCode: str):
-    metadata = MetaData()
-    set = Table('sets', metadata, autoload=True, autoload_with=engine)
     session = Session()
 
-    result = session.query(set).filter(set.c.code == setCode).first()
+    result = session.query(Set).filter(Set.code == setCode).first()
 
     return result
 
 # Returns the questions in a set
 @app.get("/api/quiz/set/questions/{setCode}")
 async def root(setCode: str):
-    metadata = MetaData()
-    questionsSet = Table('questions_sets', metadata, autoload=True, autoload_with=engine)
-    questions = Table('questions', metadata, autoload=True, autoload_with=engine)
     session = Session()
 
-    query = session.query(questions).join(questionsSet, questions.c.id == questionsSet.c.question_id).filter(questionsSet.c.set_code == setCode).all()
+    query = session.query(Question).join(QuestionSet, Question.id == QuestionSet.question_id).filter(QuestionSet.set_code == setCode).all()
 
     return query
 
 @app.get("/api/quiz/set/questions/{setCode}/{numberOfQuestions}")
 async def root(setCode: str, numberOfQuestions: int):
-    metadata = MetaData()
-    questionsSet = Table('questions_sets', metadata, autoload=True, autoload_with=engine)
-    questions = Table('questions', metadata, autoload=True, autoload_with=engine)
     session = Session()
 
-    query = session.query(questions).join(questionsSet, questions.c.id == questionsSet.c.question_id).filter(questionsSet.c.set_code == setCode).all()
+    query = session.query(Question).join(QuestionSet, Question.id == QuestionSet.question_id).filter(QuestionSet.set_code == setCode).all()
 
     #samples random questions from the set
     rand = random.sample(query, numberOfQuestions)
