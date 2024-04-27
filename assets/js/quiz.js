@@ -9,14 +9,15 @@ settings = JSON.parse(sessionStorage.getItem("fields"));
 
 endpoint = 'http://127.0.0.1:8000'
 
-$(document).ready(function() {
+$(document).ready(function () {
     let seturl = settings.set + '/' + settings.numberOfQuestions;
     $.ajax({
-        url: endpoint + '/api/quiz/set/questions/' +  seturl,
+        url: endpoint + '/api/quiz/set/questions/' + seturl,
         type: 'GET',
         success: function (data) {
             questions = data;
             displayQuestion(questions[questionNumber]);
+
 
             if (questionNumber == questions.length - 1) {  // If one question was requested, then the next button will change accordingly.
                 $('#next').text('Show result');
@@ -24,7 +25,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#next').click(function() {
+    $('#next').click(function () {
 
         storeAnswer();
 
@@ -43,7 +44,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#previous").click(function() {  // TODO: Make the website reload the previous question's answers.
+    $("#previous").click(function () {  // TODO: Make the website reload the previous question's answers.
         if (questionNumber > 0) {
             questionNumber--;
             displayQuestion(questions[questionNumber]);
@@ -52,32 +53,31 @@ $(document).ready(function() {
 });
 
 
-
 function shuffle(array) {  // Totally did not copy this from stack overflow. Also: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-    let currentIndex = array.length,  randomIndex;
-  
+    let currentIndex = array.length, randomIndex;
+
     // While there remain elements to shuffle.
     while (currentIndex != 0) {
-  
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-  
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
     }
-  
+
     return array;
 }
 
-function compareArr( arr1, arr2 ) {  // Again, totally did not copy this from stack overflow. https://stackoverflow.com/questions/29648234/is-there-a-way-to-check-if-two-arrays-have-the-same-elements
-    return  $( arr1 ).not( arr2 ).length === 0 && $( arr2 ).not( arr1 ).length === 0;  
+function compareArr(arr1, arr2) {  // Again, totally did not copy this from stack overflow. https://stackoverflow.com/questions/29648234/is-there-a-way-to-check-if-two-arrays-have-the-same-elements
+    return $(arr1).not(arr2).length === 0 && $(arr2).not(arr1).length === 0;
 }
 
-function checkAnswer(){
+function checkAnswer() {
     let checkedAnswer = [];
-    $("[name='answer']").each(function() {
+    $("[name='answer']").each(function () {
         if ($(this).is(':checked')) {
             checkedAnswer.push($("#" + $(this).val()).text());
         }
@@ -87,7 +87,7 @@ function checkAnswer(){
         return -1;
     }
 
-    if(compareArr(checkedAnswer, questionAnswer)) {
+    if (compareArr(checkedAnswer, questionAnswer)) {
         return true;
     } else {
         return false;
@@ -96,7 +96,7 @@ function checkAnswer(){
 
 function displayQuestion(question) {
     resetChoices();
-    
+
     let questionText = question.title;
     $('#q-title').text();
     let regex = /```([^]*)```/gm;
@@ -124,16 +124,15 @@ function displayQuestion(question) {
         $('#q-title').html(final);
         Prism.highlightElement($(`.language-${language}`)[0]);
         $(`.language-${language}`).addClass("code-block");
-    }
-    else {
+    } else {
         $('#q-title').text(questionText);
     }
 
-    
+
     $('#uuid').text(question.id);
     $('#questionNo').text(questionNumber + 1);
     $('#totalQuestions').text(questions.length);
-    
+
 
     let choices = JSON.parse(String(question.choices));
     questionAnswer = JSON.parse(String(question.answer));
@@ -144,11 +143,11 @@ function displayQuestion(question) {
         $("#" + alphabet[i]).parent().hide();
     }
 
-    $.each(choices, function(index, value) {  // Displays the choices.
+    $.each(choices, function (index, value) {  // Displays the choices.
         $("#" + alphabet[index]).text(value);
     });
 
-    if(questionNumber < questions.length - 1) {
+    if (questionNumber < questions.length - 1) {
         $('#next').text('Next');
     }
 
@@ -156,7 +155,7 @@ function displayQuestion(question) {
 }
 
 function resetChoices() {
-    $("[name='answer']").each(function() {
+    $("[name='answer']").each(function () {
         $(this).prop('checked', false);
     });
 
@@ -167,7 +166,7 @@ function resetChoices() {
 
 function storeAnswer() {
     let checkedAnswer = [];
-    $("[name='answer']").each(function() {
+    $("[name='answer']").each(function () {
         if ($(this).is(':checked')) {
             checkedAnswer.push($("#" + $(this).val()).text());
         }
@@ -175,7 +174,7 @@ function storeAnswer() {
 
     questionTitle = questions[questionNumber].title;
 
-    $.each(userAnswers, function(index, value) {  // Checks if the question was already answered. And if it was then it will remove the old answer to be replaced with the new one later on.
+    $.each(userAnswers, function (index, value) {  // Checks if the question was already answered. And if it was then it will remove the old answer to be replaced with the new one later on.
         if (value.question == questionTitle) {
             userAnswers.splice(index, 1);
         }
@@ -190,10 +189,10 @@ function storeAnswer() {
 function showCurrentAnswers() {
     questionTitle = $("#q-title").text();
 
-    $.each(userAnswers, function(index, value) {
+    $.each(userAnswers, function (index, value) {
         if (value.question.localeCompare(questionTitle) == 0) {
-            $.each(value.answer, function(index, value) {
-                $("[name='answer']").each(function() {
+            $.each(value.answer, function (index, value) {
+                $("[name='answer']").each(function () {
                     if ($("#" + $(this).val()).text().localeCompare(value) == 0) {
                         $(this).prop('checked', true);
                     }
